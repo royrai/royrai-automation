@@ -29,10 +29,7 @@ export function Home() {
               </h1>
 
               <p className="text-white/80 text-lg md:text-xl mb-8 max-w-xl">
-                {isRTL 
-                  ? 'אוטומציה עסקית חכמה שחוסכת לך זמן ומאפשרת לך להתמקד במה שבאמת חשוב.'
-                  : 'Smart business automation that saves you time and lets you focus on what really matters.'
-                }
+                {t.hero.subheadline}
               </p>
 
               <div className={`flex flex-col sm:flex-row gap-4 ${isRTL ? 'justify-center md:justify-end' : 'justify-center md:justify-start'}`}>
@@ -160,19 +157,19 @@ export function Home() {
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
                   <div className="text-3xl font-heading text-primary">18+</div>
                   <div className="text-sm text-text-light">
-                    {isRTL ? 'שנות ניסיון' : 'Years Experience'}
+                    {t.about.stats.years_experience}
                   </div>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
                   <div className="text-3xl font-heading text-primary">50+</div>
                   <div className="text-sm text-text-light">
-                    {isRTL ? 'פרויקטים' : 'Projects'}
+                    {t.about.stats.projects}
                   </div>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
                   <div className="text-3xl font-heading text-primary">2+</div>
                   <div className="text-sm text-text-light">
-                    {isRTL ? 'שנים עם AI' : 'Years with AI'}
+                    {t.about.stats.years_ai}
                   </div>
                 </div>
               </div>
@@ -200,10 +197,7 @@ export function Home() {
             <span className="block text-3xl md:text-4xl text-secondary mt-2">{t.hero.headline_line2}</span>
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            {isRTL 
-              ? 'מוכן להפסיק לבזבז זמן על משימות שחוזרות על עצמן? בוא נדבר.'
-              : 'Ready to stop wasting time on repetitive tasks? Let\'s talk.'
-            }
+            {t.services.ready_subtitle}
           </p>
           <Link to="/contact" className="btn-primary text-lg px-8 py-4 inline-block">
             {t.hero.cta_primary}

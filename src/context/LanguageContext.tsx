@@ -1,5 +1,10 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Language, languageDirection } from '../data/translations';
+import { Language } from '../data/translations/index';
+
+const languageDirection: Record<Language, 'ltr' | 'rtl'> = {
+  en: 'ltr',
+  he: 'rtl',
+};
 
 interface LanguageContextType {
   language: Language;

@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface ChatMessage {
   type: 'bot' | 'user';
@@ -10,7 +11,8 @@ interface ChatMessage {
 type ChatStep = 'greeting' | 'name' | 'email' | 'question' | 'complete';
 
 export function ChatBot() {
-  const { isRTL } = useLanguage();
+  const { isRTL, language } = useLanguage();
+  const t = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<ChatStep>('greeting');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -21,38 +23,10 @@ export function ChatBot() {
     question: '',
   });
 
-  const botMessages = {
-    en: {
-      greeting: "Hi! 👋 I'm here to help you learn more about automation for your business. What's your name?",
-      askEmail: (name: string) => `Nice to meet you, ${name}! What's your email so I can get back to you?`,
-      askQuestion: "Great! What would you like to know about business automation?",
-      complete: "Thank you! I've received your message and will get back to you soon. 🙌",
-      placeholder: {
-        name: "Enter your name...",
-        email: "Enter your email...",
-        question: "Type your question...",
-      },
-    },
-    he: {
-      greeting: "היי! 👋 אני כאן לעזור לך ללמוד עוד על אוטומציה לעסק שלך. מה השם שלך?",
-      askEmail: (name: string) => `נעים להכיר, ${name}! מה המייל שלך כדי שאוכל לחזור אליך?`,
-      askQuestion: "מעולה! מה תרצה לדעת על אוטומציה עסקית?",
-      complete: "תודה! קיבלתי את ההודעה שלך ואחזור אליך בקרוב. 🙌",
-      placeholder: {
-        name: "הכנס את שמך...",
-        email: "הכנס את האימייל שלך...",
-        question: "כתוב את השאלה שלך...",
-      },
-    },
-  };
-
-  const lang = isRTL ? 'he' : 'en';
-  const texts = botMessages[lang];
-
   const handleOpen = () => {
     setIsOpen(true);
     if (messages.length === 0) {
-      setMessages([{ type: 'bot', text: texts.greeting }]);
+      setMessages([{ type: 'bot', text: t.chatbot.greeting }]);
       setStep('name');
     }
   };
@@ -69,7 +43,7 @@ export function ChatBot() {
       case 'name':
         setFormData((prev) => ({ ...prev, name: userMessage }));
         setTimeout(() => {
-          setMessages((prev) => [...prev, { type: 'bot', text: texts.askEmail(userMessage) }]);
+          setMessages((prev) => [...prev, { type: 'bot', text: t.chatbot.ask_email(userMessage) }]);
           setStep('email');
         }, 500);
         break;
@@ -77,7 +51,7 @@ export function ChatBot() {
       case 'email':
         setFormData((prev) => ({ ...prev, email: userMessage }));
         setTimeout(() => {
-          setMessages((prev) => [...prev, { type: 'bot', text: texts.askQuestion }]);
+          setMessages((prev) => [...prev, { type: 'bot', text: t.chatbot.ask_question }]);
           setStep('question');
         }, 500);
         break;
@@ -91,13 +65,13 @@ export function ChatBot() {
           source: 'chatbot',
           timestamp: new Date().toISOString(),
           data: finalData,
-          language: lang,
+          language: language,
           page_url: window.location.pathname,
         };
         console.log('ChatBot submission:', payload);
 
         setTimeout(() => {
-          setMessages((prev) => [...prev, { type: 'bot', text: texts.complete }]);
+          setMessages((prev) => [...prev, { type: 'bot', text: t.chatbot.complete }]);
           setStep('complete');
         }, 500);
         break;
@@ -107,18 +81,18 @@ export function ChatBot() {
   const getPlaceholder = () => {
     switch (step) {
       case 'name':
-        return texts.placeholder.name;
+        return t.chatbot.placeholder.name;
       case 'email':
-        return texts.placeholder.email;
+        return t.chatbot.placeholder.email;
       case 'question':
-        return texts.placeholder.question;
+        return t.chatbot.placeholder.question;
       default:
         return '';
     }
   };
 
   const handleReset = () => {
-    setMessages([{ type: 'bot', text: texts.greeting }]);
+    setMessages([{ type: 'bot', text: t.chatbot.greeting }]);
     setStep('name');
     setFormData({ name: '', email: '', question: '' });
   };
@@ -149,10 +123,8 @@ export function ChatBot() {
               <span className="text-xl">🤖</span>
             </div>
             <div>
-              <h3 className="font-heading text-lg">Roy's Assistant</h3>
-              <p className="text-xs text-white/70">
-                {isRTL ? 'בדרך כלל משיב מיד' : 'Usually replies instantly'}
-              </p>
+              <h3 className="font-heading text-lg">{t.chatbot.assistant_name}</h3>
+              <p className="text-xs text-white/70">{t.chatbot.usually_replies}</p>
             </div>
           </div>
           <button
@@ -210,7 +182,7 @@ export function ChatBot() {
               onClick={handleReset}
               className="w-full py-2 text-primary hover:bg-primary/5 rounded-full transition-colors"
             >
-              {isRTL ? 'התחל שיחה חדשה' : 'Start a new conversation'}
+              {t.chatbot.new_conversation}
             </button>
           </div>
         )}

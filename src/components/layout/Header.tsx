@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTranslation } from '../../hooks/useTranslation';
-import { Language, languageNames } from '../../data/translations';
+import { Language, languageNames } from '../../data/translations/index';
 
 export function Header() {
   const { language, setLanguage, isRTL } = useLanguage();

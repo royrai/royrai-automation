@@ -9,70 +9,10 @@ export function About() {
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   const stats = [
-    {
-      icon: Clock,
-      value: '18+',
-      label: isRTL ? 'שנות ניסיון בפיתוח' : 'Years in Development',
-    },
-    {
-      icon: Award,
-      value: '2+',
-      label: isRTL ? 'שנים עם כלי AI' : 'Years with AI Tools',
-    },
-    {
-      icon: Users,
-      value: '50+',
-      label: isRTL ? 'פרויקטים מוצלחים' : 'Successful Projects',
-    },
+    { icon: Clock, value: '18+', label: t.about.stats.years_experience },
+    { icon: Award, value: '2+', label: t.about.stats.years_ai },
+    { icon: Users, value: '50+', label: t.about.stats.projects },
   ];
-
-  const skills = isRTL
-    ? [
-        'React & TypeScript',
-        'Node.js & Express',
-        'Make.com & n8n',
-        'ChatGPT & Claude API',
-        'PostgreSQL',
-        'עיצוב מערכות',
-      ]
-    : [
-        'React & TypeScript',
-        'Node.js & Express',
-        'Make.com & n8n',
-        'ChatGPT & Claude API',
-        'PostgreSQL',
-        'System Design',
-      ];
-
-  const values = isRTL
-    ? [
-        {
-          title: 'פשטות',
-          desc: 'הפתרונות הטובים ביותר הם הפשוטים ביותר. אני מאמין בבניית מערכות שקל להבין ולתחזק.',
-        },
-        {
-          title: 'שקיפות',
-          desc: 'תקשורת ברורה ופתוחה בכל שלב. בלי הפתעות, בלי עלויות נסתרות.',
-        },
-        {
-          title: 'תוצאות',
-          desc: 'ההצלחה נמדדת בתוצאות. כל פרויקט מתמקד בערך אמיתי לעסק שלך.',
-        },
-      ]
-    : [
-        {
-          title: 'Simplicity',
-          desc: 'The best solutions are the simplest ones. I believe in building systems that are easy to understand and maintain.',
-        },
-        {
-          title: 'Transparency',
-          desc: 'Clear and open communication at every step. No surprises, no hidden costs.',
-        },
-        {
-          title: 'Results',
-          desc: 'Success is measured by results. Every project focuses on real value for your business.',
-        },
-      ];
 
   return (
     <main>
@@ -125,25 +65,21 @@ export function About() {
                 </p>
 
                 <h2 className="text-2xl font-heading text-primary mt-8 mb-4">
-                  {isRTL ? 'הסיפור שלי' : 'My Story'}
+                  {t.about.story.title}
                 </h2>
                 <p className="text-text-light leading-relaxed mb-4">
-                  {isRTL
-                    ? 'אני עובד בפיתוח תוכנה כבר 18 שנה, רובן כמנהל פיתוח בסטארטאפים. בשנתיים האחרונות התמקדתי בכלי AI ואוטומציה, והבנתי שיש הזדמנות ענקית לעזור לבעלי עסקים קטנים ובינוניים ליהנות מהטכנולוגיות האלה.'
-                    : 'I\'ve been working in software development for 18 years, most of them as a development lead in startups. In the last two years, I\'ve focused on AI tools and automation, and realized there\'s a huge opportunity to help small and medium business owners benefit from these technologies.'}
+                  {t.about.story.p1}
                 </p>
                 <p className="text-text-light leading-relaxed mb-6">
-                  {isRTL
-                    ? 'היום אני עוזר לבעלי עסקים לחסוך זמן ולעבוד חכם יותר באמצעות אוטומציה ושילוב כלי AI. אני מאמין שכל עסק, גדול או קטן, יכול ליהנות מטכנולוגיה חכמה.'
-                    : 'Today I help business owners save time and work smarter through automation and AI tool integration. I believe every business, large or small, can benefit from smart technology.'}
+                  {t.about.story.p2}
                 </p>
 
                 {/* Skills */}
                 <h2 className="text-2xl font-heading text-primary mt-8 mb-4">
-                  {isRTL ? 'טכנולוגיות' : 'Technologies'}
+                  {t.about.technologies}
                 </h2>
                 <div className="flex flex-wrap gap-3 mb-8">
-                  {skills.map((skill, index) => (
+                  {t.about.skills.map((skill, index) => (
                     <span
                       key={index}
                       className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium"
@@ -155,10 +91,10 @@ export function About() {
 
                 {/* Values */}
                 <h2 className="text-2xl font-heading text-primary mt-8 mb-4">
-                  {isRTL ? 'הערכים שלי' : 'My Values'}
+                  {t.about.values.title}
                 </h2>
                 <div className="space-y-4">
-                  {values.map((value, index) => (
+                  {t.about.values.items.map((value, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <CheckCircle className="text-primary flex-shrink-0 mt-1" size={20} />
                       <div>
@@ -176,7 +112,7 @@ export function About() {
                   to="/contact"
                   className="btn-primary inline-flex items-center gap-2 text-lg px-8 py-4"
                 >
-                  {isRTL ? 'בוא נדבר' : 'Let\'s Talk'}
+                  {t.about.lets_talk}
                   <Arrow size={20} />
                 </Link>
               </div>

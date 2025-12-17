@@ -206,7 +206,7 @@ export function Contact() {
           {/* Contact Info */}
           <div className="space-y-8">
             <div className="bg-primary/5 p-8 rounded-xl">
-              <h3 className="text-xl mb-6">Get in Touch</h3>
+              <h3 className="text-xl mb-6">{t.contact.get_in_touch}</h3>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4 rtl:space-x-reverse">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -227,7 +227,7 @@ export function Contact() {
                   <div>
                     <p className="text-sm text-text-light">WhatsApp</p>
                     <a href="https://wa.me/message" className="text-text-dark hover:text-primary">
-                      Send a message
+                      WhatsApp
                     </a>
                   </div>
                 </div>
@@ -246,9 +246,9 @@ export function Contact() {
 
             {/* Cal.com placeholder */}
             <div className="bg-gray-100 p-8 rounded-xl text-center">
-              <p className="text-text-light mb-4">Schedule a free consultation</p>
+              <p className="text-text-light mb-4">{t.contact.schedule}</p>
               <div className="h-64 bg-white rounded-lg flex items-center justify-center border border-gray-200">
-                <p className="text-text-light">Cal.com embed will be added here</p>
+                <p className="text-text-light">{t.contact.cal_placeholder}</p>
               </div>
             </div>
           </div>
