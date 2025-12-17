@@ -1,6 +1,8 @@
 import { useState, FormEvent } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
+import { useLanguage } from '../context/LanguageContext';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { config, sendWebhook, getWhatsAppUrl } from '../config';
 
 interface FormData {
   name: string;
@@ -18,6 +20,7 @@ interface FormErrors {
 
 export function Contact() {
   const t = useTranslation();
+  const { language } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -63,20 +66,22 @@ export function Contact() {
     // Create payload for webhook
     const payload = {
       source: 'contact_form',
-      timestamp: new Date().toISOString(),
       data: formData,
       page_url: window.location.pathname,
+      language,
     };
 
-    // For now, just log to console
-    console.log('Form submission:', payload);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Send to webhook (or log to console if not configured)
+    const result = await sendWebhook(config.webhooks.contactForm, payload);
 
     setIsSubmitting(false);
-    setSubmitStatus('success');
-    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    
+    if (result.success) {
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    } else {
+      setSubmitStatus('error');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -226,7 +231,12 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-text-light">WhatsApp</p>
-                    <a href="https://wa.me/message" className="text-text-dark hover:text-primary">
+                    <a 
+                      href={getWhatsAppUrl(language) || 'https://wa.me/'} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-dark hover:text-primary"
+                    >
                       WhatsApp
                     </a>
                   </div>

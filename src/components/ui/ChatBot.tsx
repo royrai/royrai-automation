@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTranslation } from '../../hooks/useTranslation';
+import { config, sendWebhook } from '../../config';
 
 interface ChatMessage {
   type: 'bot' | 'user';
@@ -60,15 +61,13 @@ export function ChatBot() {
         const finalData = { ...formData, question: userMessage };
         setFormData(finalData);
         
-        // Log to console (will be replaced with webhook)
-        const payload = {
+        // Send to webhook (or log to console if not configured)
+        sendWebhook(config.webhooks.chatBot, {
           source: 'chatbot',
-          timestamp: new Date().toISOString(),
           data: finalData,
           language: language,
           page_url: window.location.pathname,
-        };
-        console.log('ChatBot submission:', payload);
+        });
 
         setTimeout(() => {
           setMessages((prev) => [...prev, { type: 'bot', text: t.chatbot.complete }]);
