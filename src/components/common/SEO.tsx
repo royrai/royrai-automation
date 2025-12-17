@@ -15,8 +15,8 @@ export function SEO({ title, description, image, type = 'website' }: SEOProps) {
   const location = useLocation();
 
   const siteTitle = config.seo.siteName;
-  const defaultTitle = config.seo.defaultTitle[language];
-  const defaultDescription = config.seo.defaultDescription[language];
+  const defaultTitle = config.seo.titles[language];
+  const defaultDescription = config.seo.descriptions[language];
   const siteUrl = config.seo.siteUrl;
   const ogImage = image || `${siteUrl}${config.seo.ogImage}`;
 

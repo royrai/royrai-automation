@@ -5,6 +5,7 @@ import { config, sendWebhook, getWhatsAppUrl } from '../config';
 import { 
   WhatsAppIcon, 
   InstagramIcon, 
+  FacebookIcon,
   LinkedInIcon, 
   EmailIcon 
 } from '../components/ui/SocialIcons';
@@ -279,6 +280,22 @@ export function Contact() {
                   <div>
                     <p className="text-sm text-text-light">Instagram</p>
                     <span className="text-text-dark font-medium">@royrai.automation</span>
+                  </div>
+                </a>
+
+                {/* Facebook */}
+                <a 
+                  href={config.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#1877F2]/10 transition-all duration-300 group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[#1877F2] flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110">
+                    <FacebookIcon size={22} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-text-light">Facebook</p>
+                    <span className="text-text-dark font-medium">{language === 'he' ? 'עקוב בפייסבוק' : 'Follow on Facebook'}</span>
                   </div>
                 </a>
               </div>

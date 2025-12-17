@@ -1,6 +1,13 @@
-// Application configuration
-// Replace placeholder values with your actual URLs
+// Application configuration - functionality and environment variables
+// For text content and links, see site-data.ts
 
+import { siteData, type Language } from './site-data';
+
+// Re-export for convenience
+export { siteData } from './site-data';
+export type { Language } from './site-data';
+
+// Environment-based configuration
 export const config = {
   // Webhook URLs (Make.com / n8n / Zapier)
   webhooks: {
@@ -9,45 +16,28 @@ export const config = {
     newsletter: import.meta.env.VITE_WEBHOOK_NEWSLETTER || '',
   },
 
-  // External services
+  // External services - merged with site data
   services: {
     calcom: {
-      // Your Cal.com username or embed URL
-      username: import.meta.env.VITE_CALCOM_USERNAME || 'royrai',
-      embedUrl: import.meta.env.VITE_CALCOM_EMBED || '',
+      username: import.meta.env.VITE_CALCOM_USERNAME || siteData.calcom.username,
+      embedUrl: import.meta.env.VITE_CALCOM_EMBED || siteData.calcom.embedUrl,
     },
     whatsapp: {
-      // Your WhatsApp number with country code (no + or spaces)
-      number: import.meta.env.VITE_WHATSAPP_NUMBER || '',
-      // Default message when clicking WhatsApp button
-      defaultMessage: {
-        en: "Hi Roy, I'm interested in learning more about automation for my business.",
-        he: 'היי רועי, אני מעוניין ללמוד עוד על אוטומציה לעסק שלי.',
-      },
+      number: import.meta.env.VITE_WHATSAPP_NUMBER || siteData.contact.whatsappNumber,
+      defaultMessage: siteData.contact.whatsappMessages,
     },
   },
 
-  // Social media links
+  // Social links from site data
   social: {
-    linkedin: 'https://linkedin.com/in/royratzon',
-    instagram: 'https://instagram.com/royrai.automation',
-    facebook: 'https://facebook.com/royrai.automation',
-    email: 'roy@royrai.com',
+    ...siteData.social,
+    email: siteData.contact.email,
   },
 
-  // SEO defaults
+  // SEO - merged with environment variables
   seo: {
-    siteName: 'Royrai Automation',
-    defaultTitle: {
-      en: 'Royrai Automation - Smart Business Automation',
-      he: 'Royrai Automation - אוטומציה עסקית חכמה',
-    },
-    defaultDescription: {
-      en: 'I build the systems. You enjoy the freedom. Smart business automation that saves you time and lets you focus on what really matters.',
-      he: 'אני בונה את המערכות. אתה נהנה מהחופש. אוטומציה עסקית חכמה שחוסכת לך זמן ומאפשרת לך להתמקד במה שבאמת חשוב.',
-    },
-    siteUrl: import.meta.env.VITE_SITE_URL || 'https://royrai.com',
-    ogImage: '/images/og-image.png',
+    ...siteData.seo,
+    siteUrl: import.meta.env.VITE_SITE_URL || siteData.seo.siteUrl,
   },
 
   // Analytics (for future use)
@@ -58,7 +48,7 @@ export const config = {
 };
 
 // Helper function to get WhatsApp URL
-export function getWhatsAppUrl(language: 'en' | 'he'): string {
+export function getWhatsAppUrl(language: Language): string {
   const { number, defaultMessage } = config.services.whatsapp;
   if (!number) return '';
   

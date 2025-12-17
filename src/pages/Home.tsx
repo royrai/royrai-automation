@@ -42,19 +42,17 @@ export function Home() {
               </div>
             </div>
 
-            {/* Image - Roy's photo placeholder */}
+            {/* Image - Roy's photo */}
             <div className="flex-shrink-0">
               <div className="relative">
-                {/* Placeholder for Roy's image - will be replaced with actual photo */}
                 <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative">
-                  {/* Image placeholder with gradient background */}
                   <div className="w-full h-full rounded-full bg-gradient-to-br from-white/30 to-white/10 flex items-center justify-center overflow-hidden">
-                    {/* Replace this div with actual image: */}
-                    {/* <img src="/images/roy-transparent.png" alt="Roy Ratzon" className="w-full h-full object-cover" /> */}
-                    <div className="text-center">
-                      <span className="text-8xl">👨‍💻</span>
-                      <p className="text-white/60 text-sm mt-2">Roy's Photo</p>
-                    </div>
+                    {/* Hero image - place roy-hero.png in /public/images/ */}
+                    <img 
+                      src="/images/roy-hero.png"
+                      alt="Roy Ratzon"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
                 {/* Decorative ring */}

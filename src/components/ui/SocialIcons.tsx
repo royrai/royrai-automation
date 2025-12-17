@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 interface SocialIconProps {
   className?: string;
   size?: number;

@@ -85,6 +85,8 @@ export const en = {
     lets_talk: "Let's Talk",
     stats: {
       years_experience: 'Years in Tech',
+      years_ai: 'Years with AI',
+      projects: 'Projects Completed',
       leadership_title: 'R&D',
       leadership_subtitle: 'Team Leadership',
       ai_title: 'AI-First',

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface PageTransitionProps {
@@ -6,43 +6,28 @@ interface PageTransitionProps {
 }
 
 /**
- * Wraps page content with a fade animation on route change.
- * Creates a smooth transition effect when navigating between pages.
+ * Simple page transition using CSS animations.
+ * Applies fade-in animation when route changes.
  */
 export function PageTransition({ children }: PageTransitionProps) {
   const location = useLocation();
-  const [displayChildren, setDisplayChildren] = useState(children);
-  const [transitionStage, setTransitionStage] = useState<'fadeIn' | 'fadeOut'>('fadeIn');
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // When location changes, start fade out
-    setTransitionStage('fadeOut');
-    
-    // After fade out animation, update content and fade in
-    const timer = setTimeout(() => {
-      setDisplayChildren(children);
-      setTransitionStage('fadeIn');
-    }, 150); // Match this with CSS animation duration
+    const container = containerRef.current;
+    if (!container) return;
 
-    return () => clearTimeout(timer);
-  }, [location.pathname]); // Only trigger on pathname change, not on children change
-
-  // Update children when they change (but not during transition)
-  useEffect(() => {
-    if (transitionStage === 'fadeIn') {
-      setDisplayChildren(children);
-    }
-  }, [children, transitionStage]);
+    // Reset animation
+    container.style.animation = 'none';
+    // Trigger reflow to restart animation
+    container.offsetHeight;
+    // Apply animation
+    container.style.animation = 'pageEnter 250ms ease-out forwards';
+  }, [location.pathname]);
 
   return (
-    <div
-      className={`transition-all duration-200 ease-out ${
-        transitionStage === 'fadeIn' 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-2'
-      }`}
-    >
-      {displayChildren}
+    <div ref={containerRef} className="page-content">
+      {children}
     </div>
   );
 }
@@ -62,20 +47,12 @@ export function FadeIn({
   duration?: number;
   className?: string;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay);
-    return () => clearTimeout(timer);
-  }, [delay]);
-
   return (
     <div
-      className={`transition-all ease-out ${className}`}
+      className={`animate-fade-in ${className}`}
       style={{
-        transitionDuration: `${duration}ms`,
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(10px)',
+        animationDelay: `${delay}ms`,
+        animationDuration: `${duration}ms`,
       }}
     >
       {children}

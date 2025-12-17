@@ -3,7 +3,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useTranslation } from '../hooks/useTranslation';
 
 export function Blog() {
-  const { isRTL, language } = useLanguage();
+  const { isRTL } = useLanguage();
   const t = useTranslation();
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 

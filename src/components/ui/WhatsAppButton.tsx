@@ -1,23 +1,24 @@
-import { MessageCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { getWhatsAppUrl } from '../../config';
+import { WhatsAppIcon } from './SocialIcons';
 
 export function WhatsAppButton() {
   const { language, isRTL } = useLanguage();
   const whatsappUrl = getWhatsAppUrl(language);
 
-  // Don't render if WhatsApp number is not configured
-  if (!whatsappUrl) return null;
+  // Always show the button - if no number configured, link to generic WhatsApp
+  // User should set VITE_WHATSAPP_NUMBER in .env for proper functionality
+  const finalUrl = whatsappUrl || 'https://wa.me/';
 
   return (
     <a
-      href={whatsappUrl}
+      href={finalUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-24 ${isRTL ? 'left-6' : 'right-6'} z-40 w-14 h-14 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300 flex items-center justify-center group`}
+      className={`fixed bottom-24 ${isRTL ? 'left-6' : 'right-6'} z-40 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#128C7E] hover:scale-110 transition-all duration-300 flex items-center justify-center group`}
       aria-label="Contact via WhatsApp"
     >
-      <MessageCircle size={28} />
+      <WhatsAppIcon size={28} />
       
       {/* Tooltip */}
       <span
