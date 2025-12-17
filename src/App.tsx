@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
+import { ChatBot } from './components/ui/ChatBot';
 import { Home } from './pages/Home';
 import { Services } from './pages/Services';
 import { About } from './pages/About';
@@ -26,6 +27,7 @@ function AppContent() {
         </Routes>
       </div>
       <Footer />
+      <ChatBot />
     </div>
   );
 }

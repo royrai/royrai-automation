@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTranslation } from '../hooks/useTranslation';
+import { Workflow, Bot, MessageSquare, Code } from 'lucide-react';
 
 export function Home() {
   const { isRTL } = useLanguage();
@@ -9,32 +10,65 @@ export function Home() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="bg-primary min-h-[70vh] flex items-center">
-        <div className="container-custom">
-          <div className={`flex flex-col md:flex-row items-center gap-8 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
-            {/* Image placeholder */}
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-white/20 flex items-center justify-center">
-              <span className="text-white text-6xl">👤</span>
-            </div>
+      <section className="relative bg-primary min-h-[75vh] flex items-center overflow-hidden">
+        {/* Background pattern overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-white rounded-full"></div>
+          <div className="absolute bottom-20 right-20 w-48 h-48 border-2 border-white rounded-full"></div>
+          <div className="absolute top-1/2 left-1/4 w-20 h-20 border-2 border-white rounded-full"></div>
+        </div>
 
-            {/* Text Content */}
-            <div className="text-center md:text-left rtl:md:text-right">
+        <div className="container-custom relative z-10">
+          <div className={`flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
+            
+            {/* Text Content - appears first on desktop based on language */}
+            <div className={`flex-1 text-center ${isRTL ? 'md:text-right' : 'md:text-left'}`}>
               <h1 className="text-white mb-6">
-                <span className="block">{t.hero.headline_line1}</span>
-                <span className="block text-secondary">{t.hero.headline_line2}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl">{t.hero.headline_line1}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-secondary mt-2">{t.hero.headline_line2}</span>
               </h1>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start rtl:md:justify-end">
-                <Link to="/contact" className="btn-primary">
+              <p className="text-white/80 text-lg md:text-xl mb-8 max-w-xl">
+                {isRTL 
+                  ? 'אוטומציה עסקית חכמה שחוסכת לך זמן ומאפשרת לך להתמקד במה שבאמת חשוב.'
+                  : 'Smart business automation that saves you time and lets you focus on what really matters.'
+                }
+              </p>
+
+              <div className={`flex flex-col sm:flex-row gap-4 ${isRTL ? 'justify-center md:justify-end' : 'justify-center md:justify-start'}`}>
+                <Link to="/contact" className="btn-primary text-lg px-8 py-4">
                   {t.hero.cta_primary}
                 </Link>
-                <Link to="/services" className="btn-secondary">
+                <Link to="/services" className="btn-secondary text-lg px-8 py-4">
                   {t.hero.cta_secondary}
                 </Link>
               </div>
             </div>
+
+            {/* Image - Roy's photo placeholder */}
+            <div className="flex-shrink-0">
+              <div className="relative">
+                {/* Placeholder for Roy's image - will be replaced with actual photo */}
+                <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative">
+                  {/* Image placeholder with gradient background */}
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-white/30 to-white/10 flex items-center justify-center overflow-hidden">
+                    {/* Replace this div with actual image: */}
+                    {/* <img src="/images/roy-transparent.png" alt="Roy Ratzon" className="w-full h-full object-cover" /> */}
+                    <div className="text-center">
+                      <span className="text-8xl">👨‍💻</span>
+                      <p className="text-white/60 text-sm mt-2">Roy's Photo</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Decorative ring */}
+                <div className="absolute inset-0 rounded-full border-4 border-secondary/30 scale-110"></div>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Video placeholder area - for future parrot video */}
+        <div className="absolute bottom-0 left-0 right-0 h-2 bg-secondary/50"></div>
       </section>
 
       {/* Services Preview Section */}
@@ -46,46 +80,47 @@ export function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Service Card 1 */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-primary text-2xl">⚙️</span>
+            {/* Service Card 1 - Automation */}
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <Workflow className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-2">{t.services.automation.title}</h3>
-              <p className="text-text-light text-sm">{t.services.automation.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{t.services.automation.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{t.services.automation.description}</p>
             </div>
 
-            {/* Service Card 2 */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-primary text-2xl">🤖</span>
+            {/* Service Card 2 - AI */}
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <Bot className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-2">{t.services.ai.title}</h3>
-              <p className="text-text-light text-sm">{t.services.ai.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{t.services.ai.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{t.services.ai.description}</p>
             </div>
 
-            {/* Service Card 3 */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-primary text-2xl">💬</span>
+            {/* Service Card 3 - Consulting */}
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <MessageSquare className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-2">{t.services.consulting.title}</h3>
-              <p className="text-text-light text-sm">{t.services.consulting.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{t.services.consulting.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{t.services.consulting.description}</p>
             </div>
 
-            {/* Service Card 4 */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-primary text-2xl">💻</span>
+            {/* Service Card 4 - Web Dev */}
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <Code className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-2">{t.services.webdev.title}</h3>
-              <p className="text-text-light text-sm">{t.services.webdev.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{t.services.webdev.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{t.services.webdev.description}</p>
             </div>
           </div>
 
-          <div className="text-center mt-8">
-            <Link to="/services" className="btn-primary">
+          <div className="text-center mt-10">
+            <Link to="/services" className="btn-primary inline-flex items-center gap-2">
               {t.services.cta}
+              <span>{isRTL ? '←' : '→'}</span>
             </Link>
           </div>
         </div>
@@ -96,19 +131,55 @@ export function Home() {
         <div className="container-custom">
           <div className={`flex flex-col md:flex-row items-center gap-12 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
             {/* Image placeholder */}
-            <div className="w-full md:w-1/3">
-              <div className="w-full aspect-square rounded-2xl bg-primary/10 flex items-center justify-center">
-                <span className="text-8xl">👨‍💻</span>
+            <div className="w-full md:w-2/5">
+              <div className="relative">
+                <div className="w-full aspect-square rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden">
+                  {/* Replace with actual image: */}
+                  {/* <img src="/images/roy-with-bg.png" alt="Roy Ratzon" className="w-full h-full object-cover" /> */}
+                  <div className="text-center">
+                    <span className="text-8xl">👨‍💻</span>
+                    <p className="text-text-light text-sm mt-2">Roy's Photo</p>
+                  </div>
+                </div>
+                {/* Decorative element */}
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-secondary/20 rounded-xl -z-10"></div>
+                <div className="absolute -top-4 -left-4 w-16 h-16 bg-primary/20 rounded-xl -z-10"></div>
               </div>
             </div>
 
             {/* Text Content */}
-            <div className="w-full md:w-2/3">
-              <h2 className="text-primary mb-2">{t.about.title}</h2>
-              <h3 className="text-3xl mb-4">{t.about.subtitle}</h3>
-              <p className="text-text-light text-lg mb-6">{t.about.intro}</p>
-              <Link to="/about" className="btn-primary">
+            <div className="w-full md:w-3/5">
+              <span className="text-primary font-medium text-sm uppercase tracking-wider">
+                {t.about.title}
+              </span>
+              <h2 className="text-3xl md:text-4xl mt-2 mb-4">{t.about.subtitle}</h2>
+              <p className="text-text-light text-lg mb-6 leading-relaxed">{t.about.intro}</p>
+              
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="text-center p-4 bg-white rounded-xl shadow-sm">
+                  <div className="text-3xl font-heading text-primary">18+</div>
+                  <div className="text-sm text-text-light">
+                    {isRTL ? 'שנות ניסיון' : 'Years Experience'}
+                  </div>
+                </div>
+                <div className="text-center p-4 bg-white rounded-xl shadow-sm">
+                  <div className="text-3xl font-heading text-primary">50+</div>
+                  <div className="text-sm text-text-light">
+                    {isRTL ? 'פרויקטים' : 'Projects'}
+                  </div>
+                </div>
+                <div className="text-center p-4 bg-white rounded-xl shadow-sm">
+                  <div className="text-3xl font-heading text-primary">2+</div>
+                  <div className="text-sm text-text-light">
+                    {isRTL ? 'שנים עם AI' : 'Years with AI'}
+                  </div>
+                </div>
+              </div>
+
+              <Link to="/about" className="btn-primary inline-flex items-center gap-2">
                 {t.about.cta}
+                <span>{isRTL ? '←' : '→'}</span>
               </Link>
             </div>
           </div>
@@ -116,13 +187,25 @@ export function Home() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="bg-primary section-padding">
-        <div className="container-custom text-center">
-          <h2 className="text-white mb-6">
-            <span className="block">{t.hero.headline_line1}</span>
-            <span className="block text-secondary">{t.hero.headline_line2}</span>
+      <section className="bg-primary section-padding relative overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 border-2 border-white rounded-full"></div>
+          <div className="absolute bottom-0 right-1/4 w-48 h-48 border-2 border-white rounded-full"></div>
+        </div>
+
+        <div className="container-custom text-center relative z-10">
+          <h2 className="text-white mb-4">
+            <span className="block text-3xl md:text-4xl">{t.hero.headline_line1}</span>
+            <span className="block text-3xl md:text-4xl text-secondary mt-2">{t.hero.headline_line2}</span>
           </h2>
-          <Link to="/contact" className="btn-primary inline-block">
+          <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+            {isRTL 
+              ? 'מוכן להפסיק לבזבז זמן על משימות שחוזרות על עצמן? בוא נדבר.'
+              : 'Ready to stop wasting time on repetitive tasks? Let\'s talk.'
+            }
+          </p>
+          <Link to="/contact" className="btn-primary text-lg px-8 py-4 inline-block">
             {t.hero.cta_primary}
           </Link>
         </div>
