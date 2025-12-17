@@ -80,7 +80,7 @@ export const siteData = {
   // Images paths
   images: {
     hero: '/images/roy-hero.png',
-    about: '/images/roy-about.jpg',
+    about: '/images/roy-about.png',
     ogImage: '/images/og-image.png',
     favicon: '/favicon.svg',
   },

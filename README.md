@@ -104,32 +104,55 @@ All images should be placed in the `public/images/` folder.
 
 ### Required Files
 
-| File Name | Location | Description | Recommended Size |
-|-----------|----------|-------------|------------------|
-| `roy-hero.png` | Home page hero | Main photo with transparent background | 600x800px |
-| `roy-about.jpg` | About page | Professional headshot | 500x500px |
-| `og-image.png` | SEO/Social sharing | Shows when sharing on social media | 1200x630px |
-| `favicon.ico` | Browser tab | Site favicon | 32x32px |
+| File Name | Used In | Description | Recommended Size |
+|-----------|---------|-------------|------------------|
+| `roy-hero.png` | Home page (hero section) | Photo with transparent background, in circle | 600x800px |
+| `roy-about.png` | Home page (about preview) + About page | Professional headshot, square | 500x500px |
+| `og-image.png` | SEO/Social sharing (meta tags) | Shows when sharing on social media | 1200x630px |
+| `favicon.svg` | Browser tab | Site icon | Any size (SVG) |
 
 ### Image Specifications
 
 **`roy-hero.png`** (Home Page Hero)
-- Format: PNG with transparent background
-- Content: Professional photo of Roy
-- Used in: Hero section on home page
+- Format: **PNG with transparent background** (required!)
+- Content: Professional photo of Roy - cutout/extracted from background
+- Used in: Hero section, displayed inside a circle with gradient border
 - Tip: Use a high-quality cutout with no background
 
-**`roy-about.jpg`** (About Page)
-- Format: JPG or PNG
-- Content: Professional headshot
-- Used in: About page sidebar
-- Tip: Square crop works best
+**`roy-about.png`** (About Section & About Page)
+- Format: **PNG** (or JPG if you rename it in `src/config/site-data.ts`)
+- Content: Professional headshot with background
+- Used in: 
+  - Home page "About" preview section
+  - About page sidebar
+- Tip: Square crop works best (1:1 ratio)
 
 **`og-image.png`** (Social Media Preview)
-- Format: PNG
-- Content: Logo + tagline, or professional photo with branding
+- Format: **PNG**
+- Content: Branded image with logo + tagline
 - Used in: When site is shared on Facebook, LinkedIn, Twitter, WhatsApp
-- Tip: Include text "Royrai Automation" and tagline
+- Tip: Include "Royrai Automation" text and a professional photo
+- This image won't appear on the website itself, only when sharing links
+
+### How to Add Images
+
+1. Place your images in `public/images/` folder
+2. Use **exact file names** as listed above
+3. Run `npm run dev` and check if images appear
+4. If images don't appear, check browser console for 404 errors
+
+### Changing Image Names or Formats
+
+If you want to use different file names or formats, edit `src/config/site-data.ts`:
+
+```typescript
+images: {
+  hero: '/images/roy-hero.png',      // Change file name here
+  about: '/images/roy-about.png',    // Change file name here
+  ogImage: '/images/og-image.png',   // Change file name here
+  favicon: '/favicon.svg',
+},
+```
 
 ### Optional Images
 
@@ -146,7 +169,7 @@ Images are referenced in code as:
 
 // In site-data.ts configuration
 hero: '/images/roy-hero.png',
-about: '/images/roy-about.jpg',
+about: '/images/roy-about.png',
 ogImage: '/images/og-image.png',
 ```
 

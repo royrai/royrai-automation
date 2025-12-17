@@ -19,7 +19,7 @@ export function Home() {
         </div>
 
         <div className="container-custom relative z-10">
-          <div className={`flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
+          <div className="flex flex-col-reverse md:flex-row-reverse items-center gap-8 md:gap-12">
             
             {/* Text Content - appears first on desktop based on language */}
             <div className={`flex-1 text-center ${isRTL ? 'md:text-right' : 'md:text-left'}`}>
@@ -129,9 +129,16 @@ export function Home() {
             <div className="w-full md:w-2/5">
               <div className="relative">
                 <div className="w-full aspect-square rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden">
-                  {/* Replace with actual image: */}
-                  {/* <img src="/images/roy-with-bg.png" alt="Roy Ratzon" className="w-full h-full object-cover" /> */}
-                  <div className="text-center">
+                  <img 
+                    src="/images/roy-about.png"
+                    alt="Roy Ratzon"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                    }}
+                  />
+                  <div className="text-center hidden">
                     <span className="text-8xl">👨‍💻</span>
                     <p className="text-text-light text-sm mt-2">Roy's Photo</p>
                   </div>

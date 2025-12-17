@@ -33,8 +33,18 @@ export function About() {
               <div className="sticky top-24">
                 <div className="relative">
                   <div className="w-full aspect-square rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden">
-                    {/* Replace with actual image */}
-                    <div className="text-center">
+                    {/* About page image */}
+                    <img 
+                      src="/images/roy-about.png"
+                      alt="Roy Ratzon"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to emoji if image not found
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                    <div className="text-center hidden">
                       <span className="text-9xl">👨‍💻</span>
                       <p className="text-text-light text-sm mt-4">Roy Ratzon</p>
                     </div>
