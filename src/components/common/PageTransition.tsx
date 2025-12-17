@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface PageTransitionProps {
@@ -6,35 +6,35 @@ interface PageTransitionProps {
 }
 
 /**
- * Simple page transition using CSS animations.
- * Applies fade-in animation when route changes.
+ * Smooth page transition with fade effect.
+ * Longer duration for smoother appearance of colored backgrounds.
  */
 export function PageTransition({ children }: PageTransitionProps) {
   const location = useLocation();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    // Fade out, then fade in
+    setIsVisible(false);
+    
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 250); // Longer delay for smoother transition
 
-    // Reset animation
-    container.style.animation = 'none';
-    // Trigger reflow to restart animation
-    container.offsetHeight;
-    // Apply animation
-    container.style.animation = 'pageEnter 250ms ease-out forwards';
+    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   return (
-    <div ref={containerRef} className="page-content">
+    <div 
+      className={`transition-opacity duration-300 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+    >
       {children}
     </div>
   );
 }
 
 /**
- * Simple fade wrapper without route detection.
- * Use this to animate individual elements on mount.
+ * Simple fade-in wrapper for individual elements.
  */
 export function FadeIn({ 
   children, 
@@ -47,12 +47,19 @@ export function FadeIn({
   duration?: number;
   className?: string;
 }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
   return (
     <div
-      className={`animate-fade-in ${className}`}
+      className={className}
       style={{
-        animationDelay: `${delay}ms`,
-        animationDuration: `${duration}ms`,
+        opacity: isVisible ? 1 : 0,
+        transition: `opacity ${duration}ms ease-out`,
       }}
     >
       {children}

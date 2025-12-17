@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
@@ -11,6 +11,10 @@ export function Header() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  
+  // Sliding underline state
+  const [underlinePos, setUnderlinePos] = useState({ left: 0, width: 0 });
+  const navContainerRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { to: '/', label: t.nav.home },
@@ -27,6 +31,39 @@ export function Header() {
     return location.pathname.startsWith(path);
   };
 
+  // Find active link index
+  const activeIndex = navLinks.findIndex(link => isActivePath(link.to));
+
+  // Update underline position
+  const updateUnderlinePosition = () => {
+    if (!navContainerRef.current || activeIndex === -1) return;
+    
+    const container = navContainerRef.current;
+    const links = container.querySelectorAll('a');
+    const activeLink = links[activeIndex] as HTMLElement;
+    
+    if (activeLink) {
+      const containerRect = container.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      
+      setUnderlinePos({
+        left: linkRect.left - containerRect.left,
+        width: linkRect.width,
+      });
+    }
+  };
+
+  // Use layoutEffect for initial measurement (before paint)
+  useLayoutEffect(() => {
+    updateUnderlinePosition();
+  }, [activeIndex, language]);
+
+  // Update on resize
+  useEffect(() => {
+    window.addEventListener('resize', updateUnderlinePosition);
+    return () => window.removeEventListener('resize', updateUnderlinePosition);
+  }, [activeIndex]);
+
   const handleLanguageChange = (lang: Language) => {
     setLanguage(lang);
     setIsLangDropdownOpen(false);
@@ -36,30 +73,39 @@ export function Header() {
     <header className="bg-background sticky top-0 z-50 shadow-sm">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo - using gap instead of margin for proper RTL support */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-1" dir="ltr">
             <span className="font-heading text-2xl text-primary">Royrai</span>
             <span className="font-heading text-2xl text-text-dark">Automation</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`font-body transition-colors relative pb-1 ${
-                  isActivePath(link.to)
-                    ? 'text-primary font-medium'
-                    : 'text-text-dark hover:text-primary'
-                }`}
-              >
-                {link.label}
-                {isActivePath(link.to) && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></span>
-                )}
-              </Link>
-            ))}
+          {/* Desktop Navigation with sliding underline */}
+          <nav className="hidden md:block">
+            <div ref={navContainerRef} className="relative flex items-center gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`font-body transition-colors py-2 ${
+                    isActivePath(link.to)
+                      ? 'text-primary font-medium'
+                      : 'text-text-dark hover:text-primary'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              
+              {/* Sliding underline */}
+              <div 
+                className="absolute bottom-0 h-0.5 bg-primary rounded-full transition-all duration-300 ease-out"
+                style={{
+                  left: underlinePos.left,
+                  width: underlinePos.width,
+                  opacity: activeIndex >= 0 ? 1 : 0,
+                }}
+              />
+            </div>
           </nav>
 
           {/* Right side: Language + Contact CTA */}

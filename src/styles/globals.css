@@ -121,22 +121,6 @@
   }
 }
 
-/* Smooth page transitions */
-.page-content {
-  opacity: 1;
-}
-
-@keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Focus visible for accessibility */
 :focus-visible {
   @apply outline-2 outline-offset-2 outline-primary;
