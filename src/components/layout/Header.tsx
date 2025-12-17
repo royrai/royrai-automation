@@ -36,10 +36,10 @@ export function Header() {
     <header className="bg-background sticky top-0 z-50 shadow-sm">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
+          {/* Logo - using gap instead of margin for proper RTL support */}
+          <Link to="/" className="flex items-center gap-1" dir="ltr">
             <span className="font-heading text-2xl text-primary">Royrai</span>
-            <span className="font-heading text-2xl text-text-dark ml-1">Automation</span>
+            <span className="font-heading text-2xl text-text-dark">Automation</span>
           </Link>
 
           {/* Desktop Navigation */}

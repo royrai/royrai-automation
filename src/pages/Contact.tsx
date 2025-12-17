@@ -1,8 +1,13 @@
 import { useState, FormEvent } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useLanguage } from '../context/LanguageContext';
-import { Mail, MessageCircle, Linkedin, Instagram } from 'lucide-react';
 import { config, sendWebhook, getWhatsAppUrl } from '../config';
+import { 
+  WhatsAppIcon, 
+  InstagramIcon, 
+  LinkedInIcon, 
+  EmailIcon 
+} from '../components/ui/SocialIcons';
 
 interface FormData {
   name: string;
@@ -212,62 +217,68 @@ export function Contact() {
           <div className="space-y-8">
             <div className="bg-primary/5 p-8 rounded-xl">
               <h3 className="text-xl mb-6">{t.contact.get_in_touch}</h3>
-              <div className="space-y-4">
+              <div className="space-y-3">
+                {/* Email */}
                 <a 
-                  href="mailto:roy@royrai.com" 
-                  className="flex items-center space-x-4 rtl:space-x-reverse p-3 rounded-lg hover:bg-primary/10 transition-colors"
+                  href={`mailto:${config.social.email}`}
+                  className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/10 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Mail className="text-primary" size={20} />
+                  <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110">
+                    <EmailIcon size={22} />
                   </div>
                   <div>
                     <p className="text-sm text-text-light">Email</p>
-                    <span className="text-text-dark">roy@royrai.com</span>
+                    <span className="text-text-dark font-medium">{config.social.email}</span>
                   </div>
                 </a>
 
-                <a 
-                  href={getWhatsAppUrl(language) || 'https://wa.me/'} 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-4 rtl:space-x-reverse p-3 rounded-lg hover:bg-green-50 transition-colors"
-                >
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                    <MessageCircle className="text-green-600" size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-text-light">WhatsApp</p>
-                    <span className="text-text-dark">{language === 'he' ? 'שלח הודעה' : 'Send a message'}</span>
-                  </div>
-                </a>
+                {/* WhatsApp */}
+                {getWhatsAppUrl(language) && (
+                  <a 
+                    href={getWhatsAppUrl(language)} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#25D366]/10 transition-all duration-300 group"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-[#25D366] flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110">
+                      <WhatsAppIcon size={22} />
+                    </div>
+                    <div>
+                      <p className="text-sm text-text-light">WhatsApp</p>
+                      <span className="text-text-dark font-medium">{language === 'he' ? 'שלח הודעה' : 'Send a message'}</span>
+                    </div>
+                  </a>
+                )}
 
+                {/* LinkedIn */}
                 <a 
                   href={config.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-4 rtl:space-x-reverse p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                  className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#0A66C2]/10 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Linkedin className="text-blue-600" size={20} />
+                  <div className="w-12 h-12 rounded-xl bg-[#0A66C2] flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110">
+                    <LinkedInIcon size={22} />
                   </div>
                   <div>
                     <p className="text-sm text-text-light">LinkedIn</p>
-                    <span className="text-text-dark">{language === 'he' ? 'התחבר איתי' : 'Connect with me'}</span>
+                    <span className="text-text-dark font-medium">{language === 'he' ? 'התחבר איתי' : 'Connect with me'}</span>
                   </div>
                 </a>
 
+                {/* Instagram */}
                 <a 
                   href={config.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-4 rtl:space-x-reverse p-3 rounded-lg hover:bg-pink-50 transition-colors"
+                  className="flex items-center gap-4 p-3 rounded-xl hover:bg-[#E4405F]/10 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
-                    <Instagram className="text-pink-600" size={20} />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110">
+                    <InstagramIcon size={22} />
                   </div>
                   <div>
                     <p className="text-sm text-text-light">Instagram</p>
-                    <span className="text-text-dark">@royrai.automation</span>
+                    <span className="text-text-dark font-medium">@royrai.automation</span>
                   </div>
                 </a>
               </div>

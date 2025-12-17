@@ -10,6 +10,7 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { Loading } from './components/common/Loading';
 import { SEO } from './components/common/SEO';
 import { ScrollToTopOnNav } from './components/common/ScrollToTopOnNav';
+import { PageTransition } from './components/common/PageTransition';
 import { useTranslation } from './hooks/useTranslation';
 
 // Lazy load pages for better performance
@@ -49,15 +50,17 @@ function AppContent() {
       <div className="flex-grow">
         <ErrorBoundary>
           <Suspense fallback={<Loading fullScreen />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </PageTransition>
           </Suspense>
         </ErrorBoundary>
       </div>

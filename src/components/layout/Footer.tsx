@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
-import { Mail, Linkedin, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useLanguage } from '../../context/LanguageContext';
 import { config, getWhatsAppUrl } from '../../config';
+import { 
+  WhatsAppIcon, 
+  InstagramIcon, 
+  FacebookIcon, 
+  LinkedInIcon, 
+  EmailIcon 
+} from '../ui/SocialIcons';
 
 export function Footer() {
   const t = useTranslation();
@@ -20,23 +26,16 @@ export function Footer() {
 
   const whatsappUrl = getWhatsAppUrl(language);
 
-  const socialLinks = [
-    { href: `mailto:${config.social.email}`, icon: Mail, label: 'Email' },
-    ...(whatsappUrl ? [{ href: whatsappUrl, icon: MessageCircle, label: 'WhatsApp' }] : []),
-    { href: config.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
-    { href: config.social.instagram, icon: Instagram, label: 'Instagram' },
-    { href: config.social.facebook, icon: Facebook, label: 'Facebook' },
-  ];
-
   return (
     <footer className="bg-primary text-white">
       <div className="container-custom section-padding">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand Column */}
           <div>
-            <div className="mb-4">
+            {/* Logo - always LTR to keep brand name in correct order */}
+            <div className="mb-4 flex items-center gap-1" dir="ltr">
               <span className="font-heading text-2xl">Royrai</span>
-              <span className="font-heading text-2xl text-secondary ml-1">Automation</span>
+              <span className="font-heading text-2xl text-secondary">Automation</span>
             </div>
             <p className="text-white/80 mb-4">{t.footer.tagline}</p>
           </div>
@@ -61,19 +60,61 @@ export function Footer() {
           {/* Connect Column */}
           <div>
             <h4 className="font-heading text-lg mb-4">{t.footer.connect}</h4>
-            <div className="flex space-x-4 rtl:space-x-reverse">
-              {socialLinks.map((social) => (
+            <div className="flex items-center gap-3">
+              {/* Email */}
+              <a
+                href={`mailto:${config.social.email}`}
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 text-white hover:scale-110"
+                aria-label="Email"
+              >
+                <EmailIcon size={20} />
+              </a>
+
+              {/* WhatsApp */}
+              {whatsappUrl && (
                 <a
-                  key={social.label}
-                  href={social.href}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-secondary transition-colors"
-                  aria-label={social.label}
+                  className="w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#128C7E] flex items-center justify-center transition-all duration-300 text-white hover:scale-110"
+                  aria-label="WhatsApp"
                 >
-                  <social.icon size={24} />
+                  <WhatsAppIcon size={20} />
                 </a>
-              ))}
+              )}
+
+              {/* LinkedIn */}
+              <a
+                href={config.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-[#0A66C2] hover:bg-[#004182] flex items-center justify-center transition-all duration-300 text-white hover:scale-110"
+                aria-label="LinkedIn"
+              >
+                <LinkedInIcon size={20} />
+              </a>
+
+              {/* Instagram */}
+              <a
+                href={config.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] hover:from-[#E4405F] hover:via-[#C13584] hover:to-[#5851DB] flex items-center justify-center transition-all duration-300 text-white hover:scale-110"
+                aria-label="Instagram"
+              >
+                <InstagramIcon size={20} />
+              </a>
+
+              {/* Facebook */}
+              <a
+                href={config.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-[#1877F2] hover:bg-[#0d65d9] flex items-center justify-center transition-all duration-300 text-white hover:scale-110"
+                aria-label="Facebook"
+              >
+                <FacebookIcon size={20} />
+              </a>
             </div>
           </div>
         </div>
