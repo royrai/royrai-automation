@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTranslation } from '../hooks/useTranslation';
-import { Workflow, Bot, MessageSquare, Code } from 'lucide-react';
+import { Workflow, Bot, MessageSquare, Code, Clock, Users, Sparkles } from 'lucide-react';
 
 export function Home() {
   const { isRTL } = useLanguage();
@@ -155,21 +155,30 @@ export function Home() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 mb-8">
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
-                  <div className="text-3xl font-heading text-primary">18+</div>
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <Clock className="text-primary" size={20} />
+                  </div>
+                  <div className="text-2xl font-heading text-primary">18+</div>
                   <div className="text-sm text-text-light">
                     {t.about.stats.years_experience}
                   </div>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
-                  <div className="text-3xl font-heading text-primary">50+</div>
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <Users className="text-primary" size={20} />
+                  </div>
+                  <div className="text-2xl font-heading text-primary">{t.about.stats.leadership_title}</div>
                   <div className="text-sm text-text-light">
-                    {t.about.stats.projects}
+                    {t.about.stats.leadership_subtitle}
                   </div>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
-                  <div className="text-3xl font-heading text-primary">2+</div>
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <Sparkles className="text-primary" size={20} />
+                  </div>
+                  <div className="text-2xl font-heading text-primary">{t.about.stats.ai_title}</div>
                   <div className="text-sm text-text-light">
-                    {t.about.stats.years_ai}
+                    {t.about.stats.ai_subtitle}
                   </div>
                 </div>
               </div>

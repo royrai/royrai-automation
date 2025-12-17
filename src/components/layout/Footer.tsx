@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Mail, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Mail, Linkedin, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
+import { useLanguage } from '../../context/LanguageContext';
+import { config, getWhatsAppUrl } from '../../config';
 
 export function Footer() {
   const t = useTranslation();
+  const { language } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
@@ -15,11 +18,14 @@ export function Footer() {
     { to: '/contact', label: t.nav.contact },
   ];
 
+  const whatsappUrl = getWhatsAppUrl(language);
+
   const socialLinks = [
-    { href: 'mailto:roy@royrai.com', icon: Mail, label: 'Email' },
-    { href: 'https://linkedin.com/in/royratzon', icon: Linkedin, label: 'LinkedIn' },
-    { href: 'https://instagram.com/royrai.automation', icon: Instagram, label: 'Instagram' },
-    { href: 'https://facebook.com/royrai.automation', icon: Facebook, label: 'Facebook' },
+    { href: `mailto:${config.social.email}`, icon: Mail, label: 'Email' },
+    ...(whatsappUrl ? [{ href: whatsappUrl, icon: MessageCircle, label: 'WhatsApp' }] : []),
+    { href: config.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
+    { href: config.social.instagram, icon: Instagram, label: 'Instagram' },
+    { href: config.social.facebook, icon: Facebook, label: 'Facebook' },
   ];
 
   return (

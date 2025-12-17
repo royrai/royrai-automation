@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -8,6 +8,7 @@ import { Language, languageNames } from '../../data/translations/index';
 export function Header() {
   const { language, setLanguage, isRTL } = useLanguage();
   const t = useTranslation();
+  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
 
@@ -18,6 +19,13 @@ export function Header() {
     { to: '/portfolio', label: t.nav.portfolio },
     { to: '/blog', label: t.nav.blog },
   ];
+
+  const isActivePath = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(path);
+  };
 
   const handleLanguageChange = (lang: Language) => {
     setLanguage(lang);
@@ -40,9 +48,16 @@ export function Header() {
               <Link
                 key={link.to}
                 to={link.to}
-                className="font-body text-text-dark hover:text-primary transition-colors"
+                className={`font-body transition-colors relative pb-1 ${
+                  isActivePath(link.to)
+                    ? 'text-primary font-medium'
+                    : 'text-text-dark hover:text-primary'
+                }`}
               >
                 {link.label}
+                {isActivePath(link.to) && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></span>
+                )}
               </Link>
             ))}
           </nav>
@@ -103,7 +118,11 @@ export function Header() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="font-body text-text-dark hover:text-primary transition-colors py-2"
+                  className={`font-body transition-colors py-2 px-3 rounded-lg ${
+                    isActivePath(link.to)
+                      ? 'text-primary bg-primary/10 font-medium'
+                      : 'text-text-dark hover:text-primary hover:bg-gray-50'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -111,7 +130,9 @@ export function Header() {
               ))}
               <Link
                 to="/contact"
-                className="btn-primary text-center"
+                className={`btn-primary text-center ${
+                  location.pathname === '/contact' ? 'ring-2 ring-primary ring-offset-2' : ''
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {t.nav.contact}

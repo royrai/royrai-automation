@@ -9,6 +9,7 @@ import { ScrollToTop } from './components/ui/ScrollToTop';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { Loading } from './components/common/Loading';
 import { SEO } from './components/common/SEO';
+import { ScrollToTopOnNav } from './components/common/ScrollToTopOnNav';
 import { useTranslation } from './hooks/useTranslation';
 
 // Lazy load pages for better performance
@@ -42,6 +43,7 @@ function PageSEO() {
 function AppContent() {
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTopOnNav />
       <PageSEO />
       <Header />
       <div className="flex-grow">

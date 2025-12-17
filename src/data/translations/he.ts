@@ -84,9 +84,11 @@ export const he = {
     },
     lets_talk: 'בוא נדבר',
     stats: {
-      years_experience: 'שנות ניסיון',
-      projects: 'פרויקטים',
-      years_ai: 'שנים עם AI',
+      years_experience: 'שנים בהייטק',
+      leadership_title: 'מוביל',
+      leadership_subtitle: 'צוותי פיתוח',
+      ai_title: 'AI-First',
+      ai_subtitle: 'גישה מתקדמת',
     },
   },
   portfolio: {
