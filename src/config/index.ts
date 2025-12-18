@@ -32,6 +32,7 @@ export const config = {
   social: {
     ...siteData.social,
     email: siteData.contact.email,
+    phoneDisplay: siteData.contact.phoneDisplay,
   },
 
   // SEO - merged with environment variables

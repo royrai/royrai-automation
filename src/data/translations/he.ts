@@ -6,7 +6,7 @@ export const he = {
     services: 'שירותים',
     about: 'אודות',
     portfolio: 'תיק עבודות',
-    blog: 'בלוג',
+    blog: 'טיפים ומדריכים',
     contact: 'צור קשר',
   },
   hero: {
@@ -135,7 +135,7 @@ export const he = {
     ],
   },
   blog: {
-    title: 'בלוג',
+    title: 'טיפים ומדריכים',
     subtitle: 'תובנות אחרונות',
     read_more: 'קרא עוד',
     stay_updated: 'הישאר מעודכן',

@@ -246,7 +246,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-text-light">WhatsApp</p>
-                      <span className="text-text-dark font-medium">{language === 'he' ? 'שלח הודעה' : 'Send a message'}</span>
+                      <span className="text-text-dark font-medium" dir="ltr">{config.social.phoneDisplay}</span>
                     </div>
                   </a>
                 )}

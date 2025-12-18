@@ -6,7 +6,7 @@ export const en = {
     services: 'Services',
     about: 'About',
     portfolio: 'Portfolio',
-    blog: 'Blog',
+    blog: 'Tips & Guides',
     contact: 'Contact',
   },
   hero: {
@@ -135,7 +135,7 @@ export const en = {
     ],
   },
   blog: {
-    title: 'Blog',
+    title: 'Tips & Guides',
     subtitle: 'Latest Insights',
     read_more: 'Read More',
     stay_updated: 'Stay Updated',

@@ -15,9 +15,11 @@ export const siteData = {
   // Contact information
   contact: {
     email: 'roy@royrai.com',
-    // WhatsApp number with country code (no + or spaces)
+    // Phone number for display (formatted)
+    phoneDisplay: '+972-55-508-1977',
+    // WhatsApp number with country code (no + or spaces or dashes)
     // Will be loaded from environment variable if set
-    whatsappNumber: '', // Set in .env as VITE_WHATSAPP_NUMBER
+    whatsappNumber: '972555081977',
     whatsappMessages: {
       en: "Hi Roy, I'm interested in learning more about automation for my business.",
       he: 'היי רועי, אני מעוניין ללמוד עוד על אוטומציה לעסק שלי.',
