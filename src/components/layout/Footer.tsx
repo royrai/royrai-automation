@@ -20,7 +20,7 @@ export function Footer() {
     { to: '/services', label: t.nav.services },
     { to: '/about', label: t.nav.about },
     { to: '/portfolio', label: t.nav.portfolio },
-    { to: '/blog', label: t.nav.blog },
+    { to: '/guides', label: t.nav.guides },
     { to: '/contact', label: t.nav.contact },
   ];
 

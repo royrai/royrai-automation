@@ -29,7 +29,7 @@ export const siteData = {
   // Social media links
   social: {
     linkedin: 'https://linkedin.com/in/royratzon',
-    instagram: 'https://instagram.com/royrai.automation',
+    instagram: 'https://instagram.com/royrai.dev',
     facebook: 'https://facebook.com/royrai.automation',
     // Add more as needed:
     // twitter: 'https://twitter.com/...',
@@ -44,8 +44,8 @@ export const siteData = {
       he: 'התחבר איתי',
     },
     instagram: {
-      en: '@royrai.automation',
-      he: '@royrai.automation',
+      en: '@royrai.dev',
+      he: '@royrai.dev',
     },
     facebook: {
       en: 'Follow on Facebook',
