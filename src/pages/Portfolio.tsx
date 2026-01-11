@@ -5,7 +5,7 @@ import { useTranslation } from '../hooks/useTranslation';
 
 export function Portfolio() {
   const { isRTL } = useLanguage();
-  const t = useTranslation();
+  const txt = useTranslation();
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   return (
@@ -13,8 +13,8 @@ export function Portfolio() {
       {/* Hero Section */}
       <section className="bg-primary py-16 md:py-24">
         <div className="container-custom text-center">
-          <h1 className="text-white mb-4">{t.portfolio.title}</h1>
-          <p className="text-white/80 text-xl">{t.portfolio.subtitle}</p>
+          <h1 className="text-white mb-4">{txt.portfolio.title}</h1>
+          <p className="text-white/80 text-xl">{txt.portfolio.subtitle}</p>
         </div>
       </section>
 
@@ -22,7 +22,7 @@ export function Portfolio() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.portfolio.items.map((item) => (
+            {txt.portfolio.items.map((item) => (
               <div
                 key={item.id}
                 className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 group"
@@ -58,7 +58,7 @@ export function Portfolio() {
 
                   {/* View Project link - placeholder for now */}
                   <button className="flex items-center gap-2 text-primary font-medium hover:underline">
-                    {t.portfolio.view_project}
+                    {txt.portfolio.view_project}
                     <ExternalLink size={16} />
                   </button>
                 </div>
@@ -71,12 +71,12 @@ export function Portfolio() {
       {/* CTA Section */}
       <section className="bg-gray-50 section-padding">
         <div className="container-custom text-center">
-          <h2 className="text-primary mb-4">{t.portfolio.want_similar}</h2>
+          <h2 className="text-primary mb-4">{txt.portfolio.want_similar}</h2>
           <p className="text-text-light text-lg mb-8 max-w-2xl mx-auto">
-            {t.portfolio.want_similar_subtitle}
+            {txt.portfolio.want_similar_subtitle}
           </p>
           <Link to="/contact" className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-2">
-            {t.hero.cta_primary}
+            {txt.hero.cta_primary}
             <Arrow size={20} />
           </Link>
         </div>

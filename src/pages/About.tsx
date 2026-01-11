@@ -5,13 +5,13 @@ import { useTranslation } from '../hooks/useTranslation';
 
 export function About() {
   const { isRTL } = useLanguage();
-  const t = useTranslation();
+  const txt = useTranslation();
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   const stats = [
-    { icon: Clock, value: '18+', label: t.about.stats.years_experience },
-    { icon: Award, value: '2+', label: t.about.stats.years_ai },
-    { icon: Users, value: '50+', label: t.about.stats.projects },
+    { icon: Clock, value: '18+', label: txt.about.stats.years_experience },
+    { icon: Award, value: '2+', label: txt.about.stats.years_ai },
+    { icon: Users, value: '50+', label: txt.about.stats.projects },
   ];
 
   return (
@@ -19,8 +19,8 @@ export function About() {
       {/* Hero Section */}
       <section className="bg-primary py-16 md:py-24">
         <div className="container-custom text-center">
-          <h1 className="text-white mb-4">{t.about.title}</h1>
-          <p className="text-white/80 text-xl">{t.about.subtitle}</p>
+          <h1 className="text-white mb-4">{txt.about.title}</h1>
+          <p className="text-white/80 text-xl">{txt.about.subtitle}</p>
         </div>
       </section>
 
@@ -71,25 +71,25 @@ export function About() {
             <div className="w-full lg:w-3/5">
               <div className="prose prose-lg max-w-none">
                 <p className="text-xl text-text-dark leading-relaxed mb-6">
-                  {t.about.intro}
+                  {txt.about.intro}
                 </p>
 
                 <h2 className="text-2xl font-heading text-primary mt-8 mb-4">
-                  {t.about.story.title}
+                  {txt.about.story.title}
                 </h2>
                 <p className="text-text-light leading-relaxed mb-4">
-                  {t.about.story.p1}
+                  {txt.about.story.p1}
                 </p>
                 <p className="text-text-light leading-relaxed mb-6">
-                  {t.about.story.p2}
+                  {txt.about.story.p2}
                 </p>
 
                 {/* Skills */}
                 <h2 className="text-2xl font-heading text-primary mt-8 mb-4">
-                  {t.about.technologies}
+                  {txt.about.technologies}
                 </h2>
                 <div className="flex flex-wrap gap-3 mb-8">
-                  {t.about.skills.map((skill, index) => (
+                  {txt.about.skills.map((skill, index) => (
                     <span
                       key={index}
                       className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium"
@@ -101,10 +101,10 @@ export function About() {
 
                 {/* Values */}
                 <h2 className="text-2xl font-heading text-primary mt-8 mb-4">
-                  {t.about.values.title}
+                  {txt.about.values.title}
                 </h2>
                 <div className="space-y-4">
-                  {t.about.values.items.map((value, index) => (
+                  {txt.about.values.items.map((value, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <CheckCircle className="text-primary flex-shrink-0 mt-1" size={20} />
                       <div>
@@ -122,7 +122,7 @@ export function About() {
                   to="/contact"
                   className="btn-primary inline-flex items-center gap-2 text-lg px-8 py-4"
                 >
-                  {t.about.lets_talk}
+                  {txt.about.lets_talk}
                   <Arrow size={20} />
                 </Link>
               </div>

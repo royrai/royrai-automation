@@ -1,6 +1,8 @@
 // Hebrew translations for Royrai Automation website
 
-export const he = {
+import type { ITranslations } from './translationTypes';
+
+export const he: ITranslations = {
   nav: {
     home: 'בית',
     services: 'שירותים',
@@ -8,6 +10,7 @@ export const he = {
     portfolio: 'תיק עבודות',
     guides: 'הדרכות',
     contact: 'צור קשר',
+    tools: 'כלים',
   },
   hero: {
     headline_line1: 'אני בונה את המערכות.',
@@ -238,6 +241,7 @@ export const he = {
     submitButton: 'שלח הודעה',
     submitting: 'שולח...',
     comingSoon: 'בקרוב',
+    whatsappMessage: 'היי רועי, אני מעוניין ללמוד עוד על אוטומציה לעסק שלי.',
   },
   footer: {
     tagline: 'עבוד חכם, לא קשה',
@@ -250,6 +254,13 @@ export const he = {
     get_started: 'התחל עכשיו',
     back_home: 'חזרה לבית',
     loading: 'טוען...',
+  },
+  socialMedia: {
+    whatsappTooltip: 'שלח הודעה בוואטסאפ',
+    facebookTooltip: 'עקוב בפייסבוק',
+    instagramTooltip: 'עקוב באינסטגרם',
+    linkedinTooltip: 'התחבר בלינקדאין',
+    emailTooltip: 'שלח אימייל',
   },
   notfound: {
     title: 'הדף לא נמצא',
@@ -269,5 +280,57 @@ export const he = {
     assistant_name: 'העוזר של רועי',
     usually_replies: 'בדרך כלל משיב מיד',
     new_conversation: 'התחל שיחה חדשה',
+  },
+  // Tools section translations
+  tools: {
+    // Tools index page
+    title: 'כלים חינמיים',
+    subtitle: 'כלים שימושיים לעזור לך במשימות היומיומיות',
+    allTools: 'כל הכלים',
+    // Common tool UI elements
+    generatedLink: 'הקישור שנוצר:',
+    copyButton: 'העתק קישור',
+    copiedButton: 'הועתק!',
+    testLink: 'בדוק קישור',
+    generateButton: 'צור קישור',
+    // Email Link Generator
+    emailLink: {
+      title: 'יוצר קישור מייל',
+      subtitle: 'צור קישור שפותח הודעת מייל חדשה עם תוכן מוכן',
+      menuLabel: 'קישור מייל',
+      providerLabel: 'סוג הקישור',
+      providers: {
+        gmail: 'Gmail (בדפדפן)',
+        outlook: 'Outlook (בדפדפן)',
+        mailto: 'תוכנת מייל (ברירת מחדל)',
+      },
+      providerNote: 'Gmail ו-Outlook יפתחו בדפדפן. השולח יהיה מי שמחובר לחשבון.',
+      toLabel: 'כתובת מייל של הנמען (אליו תישלח ההודעה)',
+      toPlaceholder: 'example@email.com',
+      toRequired: 'כתובת מייל היא שדה חובה',
+      toInvalid: 'כתובת מייל לא תקינה',
+      subjectLabel: 'נושא ההודעה',
+      subjectPlaceholder: 'נושא ההודעה',
+      subjectRequired: 'נושא הוא שדה חובה',
+      bodyLabel: 'תוכן ההודעה',
+      bodyPlaceholder: 'תוכן ההודעה...',
+      bodyRequired: 'תוכן ההודעה הוא שדה חובה',
+    },
+    // WhatsApp Link Generator
+    whatsappLink: {
+      title: 'יוצר קישור וואטסאפ',
+      subtitle: 'צור קישור שפותח שיחת וואטסאפ עם הודעה מוכנה לשליחה',
+      menuLabel: 'קישור וואטסאפ',
+      phoneLabel: 'מספר טלפון',
+      phonePlaceholder: '501234567',
+      phoneError: 'יש להזין מספר טלפון תקין (לפחות 7 ספרות)',
+      messageLabel: 'הודעה מוכנה (אופציונלי)',
+      messagePlaceholder: 'הודעה שתופיע בתיבת השליחה...',
+    },
+  },
+  // SEO titles and descriptions
+  seo: {
+    title: 'Royrai Automation - אוטומציה עסקית חכמה',
+    description: 'אני בונה את המערכות. אתה נהנה מהחופש. אוטומציה עסקית חכמה שחוסכת לך זמן ומאפשרת לך להתמקד במה שבאמת חשוב.',
   },
 };

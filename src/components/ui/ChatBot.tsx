@@ -13,7 +13,7 @@ type ChatStep = 'greeting' | 'name' | 'email' | 'question' | 'complete';
 
 export function ChatBot() {
   const { isRTL, language } = useLanguage();
-  const t = useTranslation();
+  const txt = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<ChatStep>('greeting');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -27,7 +27,7 @@ export function ChatBot() {
   const handleOpen = () => {
     setIsOpen(true);
     if (messages.length === 0) {
-      setMessages([{ type: 'bot', text: t.chatbot.greeting }]);
+      setMessages([{ type: 'bot', text: txt.chatbot.greeting }]);
       setStep('name');
     }
   };
@@ -44,7 +44,7 @@ export function ChatBot() {
       case 'name':
         setFormData((prev) => ({ ...prev, name: userMessage }));
         setTimeout(() => {
-          setMessages((prev) => [...prev, { type: 'bot', text: t.chatbot.ask_email(userMessage) }]);
+          setMessages((prev) => [...prev, { type: 'bot', text: txt.chatbot.ask_email(userMessage) }]);
           setStep('email');
         }, 500);
         break;
@@ -52,7 +52,7 @@ export function ChatBot() {
       case 'email':
         setFormData((prev) => ({ ...prev, email: userMessage }));
         setTimeout(() => {
-          setMessages((prev) => [...prev, { type: 'bot', text: t.chatbot.ask_question }]);
+          setMessages((prev) => [...prev, { type: 'bot', text: txt.chatbot.ask_question }]);
           setStep('question');
         }, 500);
         break;
@@ -70,7 +70,7 @@ export function ChatBot() {
         });
 
         setTimeout(() => {
-          setMessages((prev) => [...prev, { type: 'bot', text: t.chatbot.complete }]);
+          setMessages((prev) => [...prev, { type: 'bot', text: txt.chatbot.complete }]);
           setStep('complete');
         }, 500);
         break;
@@ -80,18 +80,18 @@ export function ChatBot() {
   const getPlaceholder = () => {
     switch (step) {
       case 'name':
-        return t.chatbot.placeholder.name;
+        return txt.chatbot.placeholder.name;
       case 'email':
-        return t.chatbot.placeholder.email;
+        return txt.chatbot.placeholder.email;
       case 'question':
-        return t.chatbot.placeholder.question;
+        return txt.chatbot.placeholder.question;
       default:
         return '';
     }
   };
 
   const handleReset = () => {
-    setMessages([{ type: 'bot', text: t.chatbot.greeting }]);
+    setMessages([{ type: 'bot', text: txt.chatbot.greeting }]);
     setStep('name');
     setFormData({ name: '', email: '', question: '' });
   };
@@ -122,8 +122,8 @@ export function ChatBot() {
               <span className="text-xl">🤖</span>
             </div>
             <div>
-              <h3 className="font-heading text-lg">{t.chatbot.assistant_name}</h3>
-              <p className="text-xs text-white/70">{t.chatbot.usually_replies}</p>
+              <h3 className="font-heading text-lg">{txt.chatbot.assistant_name}</h3>
+              <p className="text-xs text-white/70">{txt.chatbot.usually_replies}</p>
             </div>
           </div>
           <button
@@ -181,7 +181,7 @@ export function ChatBot() {
               onClick={handleReset}
               className="w-full py-2 text-primary hover:bg-primary/5 rounded-full transition-colors"
             >
-              {t.chatbot.new_conversation}
+              {txt.chatbot.new_conversation}
             </button>
           </div>
         )}

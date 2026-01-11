@@ -2,9 +2,16 @@ import { ArrowRight, ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTranslation } from '../hooks/useTranslation';
 
-export function Guides() {
+/**
+ * GuidesPage - Displays guides/blog posts with newsletter signup
+ * 
+ * Note: The route remains /guides and nav label remains "Guides".
+ * The component is named GuidesPage to avoid confusion with
+ * potential "guides" data or utility functions.
+ */
+export function GuidesPage() {
   const { isRTL } = useLanguage();
-  const t = useTranslation();
+  const txt = useTranslation();
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   const formatDate = (dateString: string) => {
@@ -19,8 +26,8 @@ export function Guides() {
       {/* Hero Section */}
       <section className="bg-primary py-16 md:py-24">
         <div className="container-custom text-center">
-          <h1 className="text-white mb-4">{t.guides.title}</h1>
-          <p className="text-white/80 text-xl">{t.guides.subtitle}</p>
+          <h1 className="text-white mb-4">{txt.guides.title}</h1>
+          <p className="text-white/80 text-xl">{txt.guides.subtitle}</p>
         </div>
       </section>
 
@@ -28,7 +35,7 @@ export function Guides() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {t.guides.posts.map((post) => (
+            {txt.guides.posts.map((post) => (
               <article
                 key={post.id}
                 className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 group"
@@ -66,7 +73,7 @@ export function Guides() {
 
                   {/* Read more link */}
                   <button className="flex items-center gap-2 text-primary font-medium hover:underline">
-                    {t.guides.read_more}
+                    {txt.guides.read_more}
                     <Arrow size={16} />
                   </button>
                 </div>
@@ -79,25 +86,25 @@ export function Guides() {
       {/* Newsletter Section */}
       <section className="bg-gray-50 section-padding">
         <div className="container-custom text-center">
-          <h2 className="text-primary mb-4">{t.guides.stay_updated}</h2>
+          <h2 className="text-primary mb-4">{txt.guides.stay_updated}</h2>
           <p className="text-text-light text-lg mb-8 max-w-2xl mx-auto">
-            {t.guides.stay_updated_subtitle}
+            {txt.guides.stay_updated_subtitle}
           </p>
           
           <div className="max-w-md mx-auto">
             <div className="flex gap-3">
               <input
                 type="email"
-                placeholder={t.guides.email_placeholder}
+                placeholder={txt.guides.email_placeholder}
                 className="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
                 dir={isRTL ? 'rtl' : 'ltr'}
               />
               <button className="btn-primary whitespace-nowrap">
-                {t.guides.subscribe}
+                {txt.guides.subscribe}
               </button>
             </div>
             <p className="text-xs text-text-light mt-3">
-              {t.guides.no_spam}
+              {txt.guides.no_spam}
             </p>
           </div>
         </div>

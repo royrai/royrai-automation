@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTranslation } from '../../hooks/useTranslation';
 import { config } from '../../config';
 
 interface SEOProps {
@@ -12,11 +13,13 @@ interface SEOProps {
 
 export function SEO({ title, description, image, type = 'website' }: SEOProps) {
   const { language } = useLanguage();
+  const txt = useTranslation();
   const location = useLocation();
 
   const siteTitle = config.seo.siteName;
-  const defaultTitle = config.seo.titles[language];
-  const defaultDescription = config.seo.descriptions[language];
+  // Get title and description from translations
+  const defaultTitle = txt.seo?.title || siteTitle;
+  const defaultDescription = txt.seo?.description || '';
   const siteUrl = config.seo.siteUrl;
   const ogImage = image || `${siteUrl}${config.seo.ogImage}`;
 

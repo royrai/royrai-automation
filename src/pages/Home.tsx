@@ -5,7 +5,7 @@ import { Workflow, Bot, MessageSquare, Code, Clock, Users, Sparkles } from 'luci
 
 export function Home() {
   const { isRTL } = useLanguage();
-  const t = useTranslation();
+  const txt = useTranslation();
 
   return (
     <main>
@@ -24,20 +24,20 @@ export function Home() {
             {/* Text Content - appears first on desktop based on language */}
             <div className={`flex-1 text-center ${isRTL ? 'md:text-right' : 'md:text-left'}`}>
               <h1 className="text-white mb-6">
-                <span className="block text-4xl md:text-5xl lg:text-6xl">{t.hero.headline_line1}</span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-secondary mt-2">{t.hero.headline_line2}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl">{txt.hero.headline_line1}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-secondary mt-2">{txt.hero.headline_line2}</span>
               </h1>
 
               <p className="text-white/80 text-lg md:text-xl mb-8 max-w-xl">
-                {t.hero.subheadline}
+                {txt.hero.subheadline}
               </p>
 
               <div className={`flex flex-col sm:flex-row gap-4 ${isRTL ? 'justify-center md:justify-end' : 'justify-center md:justify-start'}`}>
                 <Link to="/contact" className="btn-primary text-lg px-8 py-4">
-                  {t.hero.cta_primary}
+                  {txt.hero.cta_primary}
                 </Link>
                 <Link to="/services" className="btn-secondary text-lg px-8 py-4">
-                  {t.hero.cta_secondary}
+                  {txt.hero.cta_secondary}
                 </Link>
               </div>
             </div>
@@ -70,8 +70,8 @@ export function Home() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-primary mb-4">{t.services.title}</h2>
-            <p className="text-text-light text-lg">{t.services.subtitle}</p>
+            <h2 className="text-primary mb-4">{txt.services.title}</h2>
+            <p className="text-text-light text-lg">{txt.services.subtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -80,8 +80,8 @@ export function Home() {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                 <Workflow className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-3 font-heading">{t.services.automation.title}</h3>
-              <p className="text-text-light text-sm leading-relaxed">{t.services.automation.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{txt.services.automation.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{txt.services.automation.description}</p>
             </div>
 
             {/* Service Card 2 - AI */}
@@ -89,8 +89,8 @@ export function Home() {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                 <Bot className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-3 font-heading">{t.services.ai.title}</h3>
-              <p className="text-text-light text-sm leading-relaxed">{t.services.ai.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{txt.services.ai.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{txt.services.ai.description}</p>
             </div>
 
             {/* Service Card 3 - Consulting */}
@@ -98,8 +98,8 @@ export function Home() {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                 <MessageSquare className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-3 font-heading">{t.services.consulting.title}</h3>
-              <p className="text-text-light text-sm leading-relaxed">{t.services.consulting.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{txt.services.consulting.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{txt.services.consulting.description}</p>
             </div>
 
             {/* Service Card 4 - Web Dev */}
@@ -107,14 +107,14 @@ export function Home() {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
                 <Code className="text-primary group-hover:text-white transition-colors" size={28} />
               </div>
-              <h3 className="text-xl mb-3 font-heading">{t.services.webdev.title}</h3>
-              <p className="text-text-light text-sm leading-relaxed">{t.services.webdev.description}</p>
+              <h3 className="text-xl mb-3 font-heading">{txt.services.webdev.title}</h3>
+              <p className="text-text-light text-sm leading-relaxed">{txt.services.webdev.description}</p>
             </div>
           </div>
 
           <div className="text-center mt-10">
             <Link to="/services" className="btn-primary inline-flex items-center gap-2">
-              {t.services.cta}
+              {txt.services.cta}
               <span>{isRTL ? '←' : '→'}</span>
             </Link>
           </div>
@@ -152,10 +152,10 @@ export function Home() {
             {/* Text Content */}
             <div className="w-full md:w-3/5">
               <span className="text-primary font-medium text-sm uppercase tracking-wider">
-                {t.about.title}
+                {txt.about.title}
               </span>
-              <h2 className="text-3xl md:text-4xl mt-2 mb-4">{t.about.subtitle}</h2>
-              <p className="text-text-light text-lg mb-6 leading-relaxed">{t.about.intro}</p>
+              <h2 className="text-3xl md:text-4xl mt-2 mb-4">{txt.about.subtitle}</h2>
+              <p className="text-text-light text-lg mb-6 leading-relaxed">{txt.about.intro}</p>
               
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 mb-8">
@@ -165,31 +165,31 @@ export function Home() {
                   </div>
                   <div className="text-2xl font-heading text-primary">18+</div>
                   <div className="text-sm text-text-light">
-                    {t.about.stats.years_experience}
+                    {txt.about.stats.years_experience}
                   </div>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-2">
                     <Users className="text-primary" size={20} />
                   </div>
-                  <div className="text-2xl font-heading text-primary">{t.about.stats.leadership_title}</div>
+                  <div className="text-2xl font-heading text-primary">{txt.about.stats.leadership_title}</div>
                   <div className="text-sm text-text-light">
-                    {t.about.stats.leadership_subtitle}
+                    {txt.about.stats.leadership_subtitle}
                   </div>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-sm">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-2">
                     <Sparkles className="text-primary" size={20} />
                   </div>
-                  <div className="text-2xl font-heading text-primary">{t.about.stats.ai_title}</div>
+                  <div className="text-2xl font-heading text-primary">{txt.about.stats.ai_title}</div>
                   <div className="text-sm text-text-light">
-                    {t.about.stats.ai_subtitle}
+                    {txt.about.stats.ai_subtitle}
                   </div>
                 </div>
               </div>
 
               <Link to="/about" className="btn-primary inline-flex items-center gap-2">
-                {t.about.cta}
+                {txt.about.cta}
                 <span>{isRTL ? '←' : '→'}</span>
               </Link>
             </div>
@@ -207,14 +207,14 @@ export function Home() {
 
         <div className="container-custom text-center relative z-10">
           <h2 className="text-white mb-4">
-            <span className="block text-3xl md:text-4xl">{t.hero.headline_line1}</span>
-            <span className="block text-3xl md:text-4xl text-secondary mt-2">{t.hero.headline_line2}</span>
+            <span className="block text-3xl md:text-4xl">{txt.hero.headline_line1}</span>
+            <span className="block text-3xl md:text-4xl text-secondary mt-2">{txt.hero.headline_line2}</span>
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            {t.services.ready_subtitle}
+            {txt.services.ready_subtitle}
           </p>
           <Link to="/contact" className="btn-primary text-lg px-8 py-4 inline-block">
-            {t.hero.cta_primary}
+            {txt.hero.cta_primary}
           </Link>
         </div>
       </section>

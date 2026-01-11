@@ -30,7 +30,7 @@ interface NavLink {
  */
 export function Header() {
   const { language, setLanguage, isRTL } = useLanguage();
-  const t = useTranslation();
+  const txt = useTranslation();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
@@ -41,29 +41,29 @@ export function Header() {
   const [underlinePos, setUnderlinePos] = useState({ left: 0, width: 0 });
   const navContainerRef = useRef<HTMLDivElement>(null);
 
-  // Tools submenu items
+  // Tools submenu items - using translations
   const toolsSubmenu: SubMenuItem[] = [
     {
       to: "/tools/email-link",
-      label: isRTL ? "קישור מייל" : "Email Link",
+      label: txt.tools?.emailLink?.menuLabel || "Email Link",
       icon: <Mail size={18} className="text-primary" />,
     },
     {
       to: "/tools/whatsapp-link",
-      label: isRTL ? "קישור וואטסאפ" : "WhatsApp Link",
+      label: txt.tools?.whatsappLink?.menuLabel || "WhatsApp Link",
       icon: <WhatsAppIcon size={18} />,
     },
   ];
 
   const navLinks: NavLink[] = [
-    { to: "/", label: t.nav.home },
-    { to: "/services", label: t.nav.services },
-    { to: "/about", label: t.nav.about },
-    { to: "/portfolio", label: t.nav.portfolio },
-    { to: "/guides", label: t.nav.guides },
+    { to: "/", label: txt.nav.home },
+    { to: "/services", label: txt.nav.services },
+    { to: "/about", label: txt.nav.about },
+    { to: "/portfolio", label: txt.nav.portfolio },
+    { to: "/guides", label: txt.nav.guides },
     {
       to: "/tools",
-      label: isRTL ? "כלים" : "Tools",
+      label: txt.nav.tools || "Tools",
       submenu: toolsSubmenu,
     },
   ];
@@ -278,7 +278,7 @@ export function Header() {
                   : ""
               }`}
             >
-              {t.nav.contact}
+              {txt.nav.contact}
             </Link>
 
             {/* Mobile Menu Button */}
@@ -334,7 +334,7 @@ export function Header() {
                             setIsMobileToolsOpen(false);
                           }}
                         >
-                          <span>{isRTL ? "כל הכלים" : "All Tools"}</span>
+                          <span>{txt.tools?.allTools || "All Tools"}</span>
                         </Link>
                         {link.submenu.map((subItem) => (
                           <Link
@@ -382,7 +382,7 @@ export function Header() {
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t.nav.contact}
+                {txt.nav.contact}
               </Link>
             </div>
           </nav>

@@ -1,118 +1,67 @@
 import { Link } from "react-router-dom";
-import { useLanguage } from "../context/LanguageContext";
-import { Mail, Wrench, ArrowRight, ArrowLeft } from "lucide-react";
+import { useTranslation } from "../hooks/useTranslation";
+import { Mail, Wrench } from "lucide-react";
 import { WhatsAppIcon } from "../components/ui/SocialIcons";
+import { InnerPageLayout } from "../components/common/InnerPageLayout";
+import { InnerPageHeader } from "../components/common/InnerPageHeader";
 
 /**
- * ToolsIndex - Landing page for the Tools section
+ * ToolsIndex - Landing page for all available tools
  * 
- * Displays available tools (Email Link Generator, WhatsApp Link Generator)
- * and allows users to navigate to each tool.
+ * Displays a grid of available tools with links to each tool page.
  */
 export function ToolsIndex() {
-  const { isRTL } = useLanguage();
-  const Arrow = isRTL ? ArrowLeft : ArrowRight;
+  const txt = useTranslation();
+  const toolsT = txt.tools;
 
-  const texts = {
-    he: {
-      title: "כלים",
-      subtitle: "כלים שימושיים ליצירת קישורים מוכנים לשליחה",
-      emailTool: {
-        title: "יוצר קישור מייל",
-        description: "צור קישור שפותח הודעת מייל חדשה עם נמען, נושא ותוכן מוכנים. תומך ב-Gmail, Outlook ותוכנות מייל.",
-        cta: "צור קישור מייל",
-      },
-      whatsappTool: {
-        title: "יוצר קישור וואטסאפ",
-        description: "צור קישור שפותח שיחת וואטסאפ עם מספר טלפון והודעה מוכנה לשליחה.",
-        cta: "צור קישור וואטסאפ",
-      },
+  const tools = [
+    {
+      to: "/tools/email-link",
+      icon: <Mail className="w-8 h-8 text-primary" />,
+      title: toolsT?.emailLink?.title || "Email Link Generator",
+      description: toolsT?.emailLink?.subtitle || "Create email links with pre-filled content",
     },
-    en: {
-      title: "Tools",
-      subtitle: "Useful tools for creating ready-to-send links",
-      emailTool: {
-        title: "Email Link Generator",
-        description: "Create a link that opens a new email with pre-filled recipient, subject, and body. Supports Gmail, Outlook, and email apps.",
-        cta: "Create Email Link",
-      },
-      whatsappTool: {
-        title: "WhatsApp Link Generator",
-        description: "Create a link that opens a WhatsApp chat with a phone number and pre-filled message.",
-        cta: "Create WhatsApp Link",
-      },
+    {
+      to: "/tools/whatsapp-link",
+      icon: <WhatsAppIcon size={32} />,
+      title: toolsT?.whatsappLink?.title || "WhatsApp Link Generator",
+      description: toolsT?.whatsappLink?.subtitle || "Create WhatsApp links with pre-filled messages",
     },
-  };
-
-  const t = isRTL ? texts.he : texts.en;
+  ];
 
   return (
-    <main className="min-h-screen py-16 bg-gray-50">
-      <div className="container-custom">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-            <Wrench className="w-8 h-8 text-primary" />
-          </div>
-          <h1 className="font-heading text-3xl md:text-4xl text-text-dark mb-4">
-            {t.title}
-          </h1>
-          <p className="text-text-light max-w-2xl mx-auto">
-            {t.subtitle}
-          </p>
-        </div>
+    <InnerPageLayout>
+      <InnerPageHeader
+        title={toolsT?.title || "Free Tools"}
+        subtitle={toolsT?.subtitle || "Useful tools to help you with your daily tasks"}
+        icon={<Wrench className="w-8 h-8 text-primary" />}
+      />
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-          {/* Email Link Generator Card */}
-          <Link
-            to="/tools/email-link"
-            className="group bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-primary/30"
-          >
-            <div className="flex flex-col h-full">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-4 group-hover:bg-primary/20 transition-colors">
-                <Mail className="w-6 h-6 text-primary" />
+      <div className="max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6">
+          {tools.map((tool) => (
+            <Link
+              key={tool.to}
+              to={tool.to}
+              className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  {tool.icon}
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-heading text-lg text-text-dark mb-2 group-hover:text-primary transition-colors">
+                    {tool.title}
+                  </h3>
+                  <p className="text-text-light text-sm">
+                    {tool.description}
+                  </p>
+                </div>
               </div>
-              
-              <h2 className="font-heading text-xl text-text-dark mb-2">
-                {t.emailTool.title}
-              </h2>
-              
-              <p className="text-text-light text-sm mb-4 flex-grow">
-                {t.emailTool.description}
-              </p>
-              
-              <div className={`flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all ${isRTL ? "flex-row-reverse" : ""}`}>
-                <span>{t.emailTool.cta}</span>
-                <Arrow size={18} />
-              </div>
-            </div>
-          </Link>
-
-          {/* WhatsApp Link Generator Card */}
-          <Link
-            to="/tools/whatsapp-link"
-            className="group bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-primary/30"
-          >
-            <div className="flex flex-col h-full">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-4 group-hover:bg-primary/20 transition-colors">
-                <WhatsAppIcon size={24} />
-              </div>
-              
-              <h2 className="font-heading text-xl text-text-dark mb-2">
-                {t.whatsappTool.title}
-              </h2>
-              
-              <p className="text-text-light text-sm mb-4 flex-grow">
-                {t.whatsappTool.description}
-              </p>
-              
-              <div className={`flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all ${isRTL ? "flex-row-reverse" : ""}`}>
-                <span>{t.whatsappTool.cta}</span>
-                <Arrow size={18} />
-              </div>
-            </div>
-          </Link>
+            </Link>
+          ))}
         </div>
       </div>
-    </main>
+    </InnerPageLayout>
   );
 }

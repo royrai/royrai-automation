@@ -1,5 +1,6 @@
 // Site data - all text content, links, and static information
 // Edit this file to change contact info, social links, etc.
+// NOTE: Translations belong in src/data/translations/, not here.
 
 export const siteData = {
   // Brand information
@@ -18,15 +19,10 @@ export const siteData = {
     // Phone number for display (formatted)
     phoneDisplay: '+972-55-508-1977',
     // WhatsApp number with country code (no + or spaces or dashes)
-    // Will be loaded from environment variable if set
     whatsappNumber: '972555081977',
-    whatsappMessages: {
-      en: "Hi Roy, I'm interested in learning more about automation for my business.",
-      he: 'היי רועי, אני מעוניין ללמוד עוד על אוטומציה לעסק שלי.',
-    },
   },
 
-  // Social media links
+  // Social media links (URLs only - labels are in translation files)
   social: {
     linkedin: 'https://linkedin.com/in/royratzon',
     instagram: 'https://instagram.com/royrai.dev',
@@ -35,26 +31,6 @@ export const siteData = {
     // twitter: 'https://twitter.com/...',
     // youtube: 'https://youtube.com/...',
     // tiktok: 'https://tiktok.com/@...',
-  },
-
-  // Social media display names (for contact page)
-  socialLabels: {
-    linkedin: {
-      en: 'Connect with me',
-      he: 'התחבר איתי',
-    },
-    instagram: {
-      en: '@royrai.dev',
-      he: '@royrai.dev',
-    },
-    facebook: {
-      en: 'Follow on Facebook',
-      he: 'עקוב בפייסבוק',
-    },
-    whatsapp: {
-      en: 'Send a message',
-      he: 'שלח הודעה',
-    },
   },
 
   // Cal.com integration
@@ -69,14 +45,6 @@ export const siteData = {
     siteName: 'Royrai Automation',
     siteUrl: 'https://royrai.com', // Will be overridden by VITE_SITE_URL if set
     ogImage: '/images/og-image.png',
-    titles: {
-      en: 'Royrai Automation - Smart Business Automation',
-      he: 'Royrai Automation - אוטומציה עסקית חכמה',
-    },
-    descriptions: {
-      en: 'I build the systems. You enjoy the freedom. Smart business automation that saves you time and lets you focus on what really matters.',
-      he: 'אני בונה את המערכות. אתה נהנה מהחופש. אוטומציה עסקית חכמה שחוסכת לך זמן ומאפשרת לך להתמקד במה שבאמת חשוב.',
-    },
   },
 
   // Images paths
@@ -91,7 +59,7 @@ export const siteData = {
 // Type for language keys
 export type Language = 'en' | 'he';
 
-// Helper to get localized text
+// Helper to get localized text from translation object
 export function getLocalizedText(
   obj: { en: string; he: string },
   language: Language

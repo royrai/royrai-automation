@@ -4,7 +4,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
 import { ChatBot } from "./components/ui/ChatBot";
-import { WhatsAppButton } from "./components/ui/WhatsAppButton";
+import { WhatsAppButton } from "./components/ui/SocialMediaButtons";
 import { ScrollToTop } from "./components/ui/ScrollToTop";
 import { ErrorBoundary } from "./components/common/ErrorBoundary";
 import { Loading } from "./components/common/Loading";
@@ -18,7 +18,7 @@ const Home = lazy(() => import("./pages/Home").then(m => ({ default: m.Home })))
 const Services = lazy(() => import("./pages/Services").then(m => ({ default: m.Services })));
 const About = lazy(() => import("./pages/About").then(m => ({ default: m.About })));
 const Portfolio = lazy(() => import("./pages/Portfolio").then(m => ({ default: m.Portfolio })));
-const Guides = lazy(() => import("./pages/Guides").then(m => ({ default: m.Guides })));
+const GuidesPage = lazy(() => import("./pages/GuidesPage").then(m => ({ default: m.GuidesPage })));
 const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Contact })));
 const ToolsIndex = lazy(() => import("./pages/ToolsIndex").then(m => ({ default: m.ToolsIndex })));
 const EmailLinkGenerator = lazy(() => import("./pages/EmailLinkGenerator").then(m => ({ default: m.EmailLinkGenerator })));
@@ -30,18 +30,18 @@ const NotFound = lazy(() => import("./pages/NotFound").then(m => ({ default: m.N
  */
 function PageSEO() {
   const location = useLocation();
-  const t = useTranslation();
+  const txt = useTranslation();
   
   const pageTitles: Record<string, string> = {
     "/": "",
-    "/services": t.nav.services,
-    "/about": t.nav.about,
-    "/portfolio": t.nav.portfolio,
-    "/guides": t.nav.guides,
-    "/contact": t.nav.contact,
-    "/tools": "Tools",
-    "/tools/email-link": "Email Link Generator",
-    "/tools/whatsapp-link": "WhatsApp Link Generator",
+    "/services": txt.nav.services,
+    "/about": txt.nav.about,
+    "/portfolio": txt.nav.portfolio,
+    "/guides": txt.nav.guides,
+    "/contact": txt.nav.contact,
+    "/tools": txt.tools?.title || "Tools",
+    "/tools/email-link": txt.tools?.emailLink?.title || "Email Link Generator",
+    "/tools/whatsapp-link": txt.tools?.whatsappLink?.title || "WhatsApp Link Generator",
   };
 
   const title = pageTitles[location.pathname];
@@ -67,7 +67,7 @@ function AppContent() {
                 <Route path="/services" element={<Services />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/guides" element={<Guides />} />
+                <Route path="/guides" element={<GuidesPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/tools" element={<ToolsIndex />} />
                 <Route path="/tools/email-link" element={<EmailLinkGenerator />} />
@@ -80,7 +80,7 @@ function AppContent() {
       </div>
       <Footer />
       <ScrollToTop />
-      <WhatsAppButton />
+      <WhatsAppButton variant="floating" />
       <ChatBot />
     </div>
   );

@@ -1,6 +1,8 @@
 // English translations for Royrai Automation website
 
-export const en = {
+import type { ITranslations } from './translationTypes';
+
+export const en: ITranslations = {
   nav: {
     home: 'Home',
     services: 'Services',
@@ -8,6 +10,7 @@ export const en = {
     portfolio: 'Portfolio',
     guides: 'Guides',
     contact: 'Contact',
+    tools: 'Tools',
   },
   hero: {
     headline_line1: 'I Build the Systems.',
@@ -238,6 +241,7 @@ export const en = {
     submitButton: 'Send Message',
     submitting: 'Sending...',
     comingSoon: 'Coming soon',
+    whatsappMessage: "Hi Roy, I'm interested in learning more about automation for my business.",
   },
   footer: {
     tagline: 'Work Smart, Not Hard',
@@ -250,6 +254,13 @@ export const en = {
     get_started: 'Get Started',
     back_home: 'Back to Home',
     loading: 'Loading...',
+  },
+  socialMedia: {
+    whatsappTooltip: 'Message on WhatsApp',
+    facebookTooltip: 'Follow on Facebook',
+    instagramTooltip: 'Follow on Instagram',
+    linkedinTooltip: 'Connect on LinkedIn',
+    emailTooltip: 'Send an email',
   },
   notfound: {
     title: 'Page Not Found',
@@ -269,5 +280,57 @@ export const en = {
     assistant_name: "Roy's Assistant",
     usually_replies: 'Usually replies instantly',
     new_conversation: 'Start a new conversation',
+  },
+  // Tools section translations
+  tools: {
+    // Tools index page
+    title: 'Free Tools',
+    subtitle: 'Useful tools to help you with your daily tasks',
+    allTools: 'All Tools',
+    // Common tool UI elements
+    generatedLink: 'Generated link:',
+    copyButton: 'Copy Link',
+    copiedButton: 'Copied!',
+    testLink: 'Test Link',
+    generateButton: 'Generate Link',
+    // Email Link Generator
+    emailLink: {
+      title: 'Email Link Generator',
+      subtitle: 'Create a link that opens a new email with pre-filled content',
+      menuLabel: 'Email Link',
+      providerLabel: 'Link type',
+      providers: {
+        gmail: 'Gmail (in browser)',
+        outlook: 'Outlook (in browser)',
+        mailto: 'Email app (default)',
+      },
+      providerNote: 'Gmail and Outlook will open in browser. Sender will be whoever is logged in.',
+      toLabel: 'Recipient email address (who will receive the email)',
+      toPlaceholder: 'example@email.com',
+      toRequired: 'Email address is required',
+      toInvalid: 'Invalid email address',
+      subjectLabel: 'Email subject',
+      subjectPlaceholder: 'Message subject',
+      subjectRequired: 'Subject is required',
+      bodyLabel: 'Email body',
+      bodyPlaceholder: 'Message content...',
+      bodyRequired: 'Message body is required',
+    },
+    // WhatsApp Link Generator
+    whatsappLink: {
+      title: 'WhatsApp Link Generator',
+      subtitle: 'Create a link that opens a WhatsApp chat with a pre-filled message',
+      menuLabel: 'WhatsApp Link',
+      phoneLabel: 'Phone number',
+      phonePlaceholder: '501234567',
+      phoneError: 'Please enter a valid phone number (at least 7 digits)',
+      messageLabel: 'Pre-filled message (optional)',
+      messagePlaceholder: 'Message that will appear in the chat box...',
+    },
+  },
+  // SEO titles and descriptions
+  seo: {
+    title: 'Royrai Automation - Smart Business Automation',
+    description: 'I build the systems. You enjoy the freedom. Smart business automation that saves you time and lets you focus on what really matters.',
   },
 };

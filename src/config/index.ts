@@ -1,7 +1,8 @@
 // Application configuration - functionality and environment variables
 // For text content and links, see site-data.ts
+// For constants and URL templates, see constants.ts
 
-import { siteData, type Language } from './site-data';
+import { siteData } from './site-data';
 
 // Re-export for convenience
 export { siteData } from './site-data';
@@ -24,7 +25,6 @@ export const config = {
     },
     whatsapp: {
       number: import.meta.env.VITE_WHATSAPP_NUMBER || siteData.contact.whatsappNumber,
-      defaultMessage: siteData.contact.whatsappMessages,
     },
   },
 
@@ -49,12 +49,15 @@ export const config = {
 };
 
 // Helper function to get WhatsApp URL
-export function getWhatsAppUrl(language: Language): string {
-  const { number, defaultMessage } = config.services.whatsapp;
+// Uses URL templates from constants
+export function getWhatsAppUrl(message?: string): string {
+  const { number } = config.services.whatsapp;
   if (!number) return '';
   
-  const message = encodeURIComponent(defaultMessage[language]);
-  return `https://wa.me/${number}?text=${message}`;
+  if (message) {
+    return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  }
+  return `https://wa.me/${number}`;
 }
 
 // Helper function to send webhook

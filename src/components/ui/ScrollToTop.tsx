@@ -1,13 +1,16 @@
-import { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
-import { useLanguage } from '../../context/LanguageContext';
+import { useState, useEffect } from "react";
+import { ChevronUp } from "lucide-react";
 
+/**
+ * ScrollToTop - A floating button that appears when user scrolls down
+ * and scrolls back to the top of the page when clicked.
+ */
 export function ScrollToTop() {
-  const { isRTL } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
+      // Show button when page is scrolled more than 300px
       if (window.scrollY > 300) {
         setIsVisible(true);
       } else {
@@ -15,26 +18,31 @@ export function ScrollToTop() {
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-44 ${isRTL ? 'left-6' : 'right-6'} z-40 w-12 h-12 bg-gray-800 text-white rounded-full shadow-lg hover:bg-primary transition-all duration-300 flex items-center justify-center ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-      }`}
+      className="fixed bottom-24 right-6 z-40 p-3 bg-primary text-white rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 hover:scale-110"
       aria-label="Scroll to top"
     >
-      <ArrowUp size={24} />
+      <ChevronUp className="w-6 h-6" />
     </button>
   );
 }
